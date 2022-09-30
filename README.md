@@ -84,8 +84,8 @@ To access the API you’ll need to first specify an API key as provided to
 you by the project.
 
 ``` r
-# Example API key (this key will not work).
-set_api_key("7b58ffa5afcf893d678433a56e0edca5")
+# Example API key (this key will only allow 10 search results).
+set_api_key("test_the_package")
 get_api_key()
 ```
 

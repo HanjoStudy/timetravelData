@@ -158,8 +158,11 @@
 <div class="section level3">
 <h3 id="querying-the-text">Querying the text<a class="anchor" aria-label="anchor" href="#querying-the-text"></a>
 </h3>
-<p>The searching functionality uses a very simple interface through the <code>query_text</code> function. Lets imagine we need to look for whether the word “cotton” is contained in the text:</p>
+<p>The searching functionality uses a very simple interface through the <code>query_text</code> function. Lets imagine we need to look for whether the word “cotton” is contained in the text. Start by looking up how many <em>hits</em> were seen in the database:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">total_hits</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/query_hits.html">query_hits</a></span><span class="op">(</span><span class="st">"cotton"</span><span class="op">)</span></span></code></pre></div>
+<p>From the example, we can see that the word “cotton” was observed on 9255 pages. Next we can start retrieving the text:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/query_text.html">query_text</a></span><span class="op">(</span></span>
 <span>  query <span class="op">=</span><span class="st">"cotton"</span>,</span>
 <span>  from_pos <span class="op">=</span> <span class="fl">0</span>,</span>
@@ -167,19 +170,19 @@
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">out</span></span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 10 × 4</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>   guid_hash            pg_nr type     hightlight</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>   <span class="sc">&lt;</span>chr<span class="sc">&gt;</span>                <span class="er">&lt;</span>int<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>    <span class="er">&lt;</span>list<span class="sc">&gt;</span>    </span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a> <span class="dv">1</span> b24f414b88a247bd7b5d   <span class="dv">680</span> pdftools <span class="sc">&lt;</span>chr [<span class="dv">19</span>]<span class="sc">&gt;</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a> <span class="dv">2</span> 704016213cd70d8cdc58    <span class="dv">66</span> pdftools <span class="sc">&lt;</span>chr [<span class="dv">13</span>]<span class="sc">&gt;</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a> <span class="dv">3</span> 06b3494a9347aad3726c   <span class="dv">194</span> pdftools <span class="sc">&lt;</span>chr [<span class="dv">14</span>]<span class="sc">&gt;</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a> <span class="dv">4</span> da787b1696d108219db4    <span class="dv">81</span> pdftools <span class="sc">&lt;</span>chr [<span class="dv">5</span>]<span class="sc">&gt;</span> </span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a> <span class="dv">5</span> 91078ccd5db5d7530e10   <span class="dv">299</span> pdftools <span class="sc">&lt;</span>chr [<span class="dv">7</span>]<span class="sc">&gt;</span> </span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a> <span class="dv">6</span> b24f414b88a247bd7b5d   <span class="dv">396</span> pdftools <span class="sc">&lt;</span>chr [<span class="dv">9</span>]<span class="sc">&gt;</span> </span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a> <span class="dv">7</span> e2cc4778a6fb02dca0bd   <span class="dv">336</span> pdftools <span class="sc">&lt;</span>chr [<span class="dv">8</span>]<span class="sc">&gt;</span> </span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a> <span class="dv">8</span> b24f414b88a247bd7b5d   <span class="dv">432</span> pdftools <span class="sc">&lt;</span>chr [<span class="dv">11</span>]<span class="sc">&gt;</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a> <span class="dv">9</span> b24f414b88a247bd7b5d   <span class="dv">431</span> pdftools <span class="sc">&lt;</span>chr [<span class="dv">11</span>]<span class="sc">&gt;</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> b24f414b88a247bd7b5d   <span class="dv">679</span> pdftools <span class="sc">&lt;</span>chr [<span class="dv">9</span>]<span class="sc">&gt;</span> </span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 10 × 4</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>   guid_hash            pg_nr type     hightlight</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>   <span class="sc">&lt;</span>chr<span class="sc">&gt;</span>                <span class="er">&lt;</span>int<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>    <span class="er">&lt;</span>list<span class="sc">&gt;</span>    </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a> <span class="dv">1</span> b24f414b88a247bd7b5d   <span class="dv">680</span> pdftools <span class="sc">&lt;</span>chr [<span class="dv">19</span>]<span class="sc">&gt;</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a> <span class="dv">2</span> 704016213cd70d8cdc58    <span class="dv">66</span> pdftools <span class="sc">&lt;</span>chr [<span class="dv">13</span>]<span class="sc">&gt;</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a> <span class="dv">3</span> 06b3494a9347aad3726c   <span class="dv">194</span> pdftools <span class="sc">&lt;</span>chr [<span class="dv">14</span>]<span class="sc">&gt;</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a> <span class="dv">4</span> da787b1696d108219db4    <span class="dv">81</span> pdftools <span class="sc">&lt;</span>chr [<span class="dv">5</span>]<span class="sc">&gt;</span> </span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a> <span class="dv">5</span> 91078ccd5db5d7530e10   <span class="dv">299</span> pdftools <span class="sc">&lt;</span>chr [<span class="dv">7</span>]<span class="sc">&gt;</span> </span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a> <span class="dv">6</span> b24f414b88a247bd7b5d   <span class="dv">396</span> pdftools <span class="sc">&lt;</span>chr [<span class="dv">9</span>]<span class="sc">&gt;</span> </span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a> <span class="dv">7</span> e2cc4778a6fb02dca0bd   <span class="dv">336</span> pdftools <span class="sc">&lt;</span>chr [<span class="dv">8</span>]<span class="sc">&gt;</span> </span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a> <span class="dv">8</span> b24f414b88a247bd7b5d   <span class="dv">432</span> pdftools <span class="sc">&lt;</span>chr [<span class="dv">11</span>]<span class="sc">&gt;</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a> <span class="dv">9</span> b24f414b88a247bd7b5d   <span class="dv">431</span> pdftools <span class="sc">&lt;</span>chr [<span class="dv">11</span>]<span class="sc">&gt;</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> b24f414b88a247bd7b5d   <span class="dv">679</span> pdftools <span class="sc">&lt;</span>chr [<span class="dv">9</span>]<span class="sc">&gt;</span> </span></code></pre></div>
 <p>The function has three parameters:</p>
 <ul>
 <li>
@@ -200,10 +203,6 @@
 <li>
 <strong>Highlight:</strong> This is the most important column. This contains the snippets of where the text matched. To extract the text it is suggested to <code>unnest</code> the column using the <code>tidyr</code> unfunction as: <code>out %&gt;% unnest(hightlight)</code>.</li>
 </ul>
-<p>You can also look up how many <em>hits</em> were seen in the database:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">total_hits</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/query_hits.html">query_hits</a></span><span class="op">(</span><span class="st">"cotton"</span><span class="op">)</span></span></code></pre></div>
-<p>From the example, we can see that the word “cotton” was observed on 1 pages.</p>
 </div>
 <div class="section level3">
 <h3 id="document-meta">Document meta<a class="anchor" aria-label="anchor" href="#document-meta"></a>

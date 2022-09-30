@@ -107,7 +107,15 @@ website: <https://timetraveller.voyage/>.
 
 The searching functionality uses a very simple interface through the
 `query_text` function. Lets imagine we need to look for whether the word
-“cotton” is contained in the text:
+“cotton” is contained in the text. Start by looking up how many *hits*
+were seen in the database:
+
+``` r
+total_hits <- query_hits("cotton")
+```
+
+From the example, we can see that the word “cotton” was observed on 9255
+pages. Next we can start retrieving the text:
 
 ``` r
 out <- query_text(
@@ -157,15 +165,6 @@ This function outputs four columns:
     snippets of where the text matched. To extract the text it is
     suggested to `unnest` the column using the `tidyr` unfunction as:
     `out %>% unnest(hightlight)`.
-
-You can also look up how many *hits* were seen in the database:
-
-``` r
-total_hits <- query_hits("cotton")
-```
-
-From the example, we can see that the word “cotton” was observed on 1
-pages.
 
 ### Document meta
 

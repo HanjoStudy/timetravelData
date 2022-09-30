@@ -105,7 +105,13 @@ To obtain a key, please get in touch. Contact details are on the website: <https
 
 ### Querying the text
 
-The searching functionality uses a very simple interface through the `query_text` function. Lets imagine we need to look for whether the word "cotton" is contained in the text:
+The searching functionality uses a very simple interface through the `query_text` function. Lets imagine we need to look for whether the word "cotton" is contained in the text. Start by looking up how many _hits_ were seen in the database:
+
+```{r, eval = TRUE}
+total_hits <- query_hits("cotton")
+```
+
+From the example, we can see that the word "cotton" was observed on `r total_hits` pages. Next we can start retrieving the text:
 
 ```{r, eval=TRUE}
 out <- query_text(
@@ -130,13 +136,6 @@ This function outputs four columns:
 * **type:** We use two types of text extraction methods: `libpoppler` from the [`pdftools`](https://github.com/ropensci/pdftools) package, as well as the [`tesseract`](https://github.com/ropensci/tesseract) library when the `pdftools` library failed. This column indicates which tool is displayed.
 * **Highlight:** This is the most important column. This contains the snippets of where the text matched. To extract the text it is suggested to `unnest` the column using the `tidyr` unfunction as: `out %>% unnest(hightlight)`.
 
-You can also look up how many _hits_ were seen in the database:
-
-```{r, eval = TRUE}
-total_hits <- query_hits("cotton")
-```
-
-From the example, we can see that the word "cotton" was observed on `r length(total_hits)` pages.
 
 ### Document meta
 

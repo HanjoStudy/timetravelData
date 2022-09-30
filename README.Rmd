@@ -1,0 +1,221 @@
+---
+output: github_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+   echo = TRUE, 
+   comment=NA,
+   eval = FALSE, 
+   fig.path = "man/figures/")
+# options(tibble.width = Inf)
+# pkgdown::build_site()
+# https://www.loc.gov/marc/relators/relaterm.html
+```
+
+# timetravelData <img src="man/figures/logo.png" align="right" alt="" width="120" />
+
+Welcome to the [Time Traveller Project!](https://timetraveller.voyage/).
+
+Time Traveller is a digital humanities project that collects, analyses, and disseminates data about travellers’ observations of pre-colonial Africa using the latest techniques in computer science. 
+
+Very few written primary accounts of pre-colonial Africa exist. This lack of documented history hinders our understanding of Africa’s past and long-term trajectory. We collect over 1000 years of African economic history using handwritten accounts from travellers and their maps. 
+
+Analysing such a corpus of text is an insurmountable task for traditional historians and would probably take a lifetimes work. By combining modern day computational linguistic techniques in combination with domain knowledge of African economic history, we build a corpus of pre-colonial African history across space and time. This large body of written accounts can be used to systemically shed new light on Africa’s past.
+
+The project uses multiple open-source tools to make this data available:
+
+```{r, echo=FALSE, eval = TRUE}
+knitr::include_graphics("man/figures/architecture.png")
+```
+
+
+## Api Interface
+
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![](https://img.shields.io/github/last-commit/HanjoStudy/timetravelData.svg)](https://github.com/HanjoStudy/timetravelData/commits/develop)
+
+[timetravelData](https://github.com/HanjoStudy/timetravelData) provides access to over 500,000 pages of travel accounts via an API that is fed by Elasticsearch.
+
+This is the homepage for the {timetravelData} R package is at <https://github.com/HanjoStudy/timetravelData>.
+
+The homepage for the {timetravelData} `python` package is _coming soon!_.
+
+## Installation
+
+Install from GitHub.
+
+```{r eval=FALSE}
+remotes::install_github("HanjoStudy/timetravelData")
+```
+
+If you want availability to the latest features (at your own risk) then you can also install from the development branch.
+
+```{r eval=FALSE}
+remotes::install_github("HanjoStudy/timetravelData", ref = "dev")
+```
+
+## Usage
+
+```{r load-package, eval = TRUE}
+library(timetravelData)
+library(tidyr)
+```
+
+Check version.
+
+```{r check-version}
+packageVersion("timetravelData")
+```
+
+### Set API Key
+
+To access the API you'll need to first specify an API key as provided to you by the project.
+
+```{r eval=FALSE}
+# Example API key (this key will not work).
+set_api_key("7b58ffa5afcf893d678433a56e0edca5")
+get_api_key()
+```
+
+```{r include=FALSE}
+set_api_key(Sys.getenv("TIMETRAVELDATA_KEY"))
+```
+
+If you wish not to set the key every time, use `usethis::edit_r_environ()` to set the key to `TIMETRAVELDATA_KEY`.
+
+Please be aware, that there is an order where the API looks for keys:
+
+1) Look for `ENV` variable, `TIMETRAVELDATA_KEY`, if not found, look in `cache` where key was stored using `set_api_key()`
+3) `set_api_key()` OVERRIDES `TIMETRAVELDATA_KEY` in `.Renviron`!
+
+To obtain a key, please get in touch. Contact details are on the website: <https://timetraveller.voyage/>.
+
+## Full-text Search
+
+### Querying the text
+
+The searching functionality uses a very simple interface through the `query_text` function. Lets imagine we need to look for whether the word "cotton" is contained in the text:
+
+```{r, eval=TRUE}
+out <- query_text(
+  query ="cotton",
+  from_pos = 0,
+  tidy = TRUE
+)
+
+out
+```
+
+The function has three parameters:
+
+* **query:** This contains the text we want to search.
+* **from_pos:** This parameter is used in pagination. See the vignette how to page through results.
+* **tidy:** The default is to tidy the results in a nested `tibble` where the word could have occured more than once on a page
+
+This function outputs four columns:
+
+* **guid_hash:** This is the _global unique identifier_ and links back to a document (not page) within our larger corpus. See below how to look up the document meta information.
+* **pg_nr:** This is the _page number_ on which the search got a positive match.
+* **type:** We use two types of text extraction methods: `libpoppler` from the [`pdftools`](https://github.com/ropensci/pdftools) package, as well as the [`tesseract`](https://github.com/ropensci/tesseract) library when the `pdftools` library failed. This column indicates which tool is displayed.
+* **Highlight:** This is the most important column. This contains the snippets of where the text matched. To extract the text it is suggested to `unnest` the column using the `tidyr` unfunction as: `out %>% unnest(hightlight)`.
+
+### Document meta
+
+To find the document meta, we need to feed the `document_meta` function a `guid_hash`
+
+```{r, eval = TRUE}
+out <- query_text(
+  query ="cotton",
+  from_pos = 0,
+  tidy = TRUE
+)
+
+guid_hash <- unique(out$guid_hash)[1]
+document_meta(guid_hash) %>% t
+```
+
+This function outputs nine columns.
+
+
+### Advance search queries with Lucene notation
+
+#### Basic Search
+
+See full documentation on Elasticsearch's [website](https://www.elastic.co/guide/en/elasticsearch/reference/8.4/query-dsl-query-string-query.html#query-string-syntax)
+
+Basic searches uses an analyzer that independently converts each part into tokens before returning matching documents:
+
+```{r, eval = TRUE}
+query <- "(new york city) OR (big apple)"
+out <- query_text(query)
+out %>% unnest()
+```
+
+A term can be a single word _quick_ or _brown_ - or a phrase, surrounded by double quotes - "quick brown"
+
+```{r, eval = TRUE}
+query <- '"new york"'
+out <- query_text(query)
+out %>% unnest()
+```
+
+#### Fuzzy Search
+
+You can run fuzzy queries using the `~` operator (We have it set to lvl. 1). 
+
+> The query uses the Damerau-Levenshtein distance to find all terms with a maximum of two changes, where a change is the insertion, deletion or substitution of a single character, or transposition of two adjacent characters.
+
+```{r, eval = TRUE}
+query <- "Aligtor~"
+out <- query_text(query)
+out %>% unnest()
+```
+
+#### Proximity Search
+
+We can also apply proximity searches:
+
+```{r, eval = TRUE}
+query <- '"crocodile shoot"~5'
+out <- query_text(query)
+out %>% unnest()
+```
+
+#### Boosting Search
+
+Use the boost operator `^` to make one term more relevant than another:
+
+```{r, eval = TRUE}
+query <- '"crocodile^ shoot"~5'
+out <- query_text(query)
+out %>% unnest()
+```
+
+#### Boolean
+
+> By default, all terms are optional, as long as one term matches. A search for `foo bar baz` will find any document that contains one or more of `foo` or `bar` or `baz`. We have already discussed the default_operator above which allows you to force all terms to be required, but there are also boolean operators which can be used in the query string itself to provide more control.
+
+The preferred operators are `+` (this term must be present) and `-` (this term must not be present). All other terms are optional. For example, this query:
+
+```{r, eval = TRUE}
+query <- "crocodile shoot +hunting -shoes"
+out <- query_text(query)
+out %>% unnest()
+```
+
+states that:
+
+* `hunting` must be present.
+* `shoes` must not be present.
+* `crocodile` and `shoot` are optional - their presence increases the relevance.
+
+
+
+
+
+
+
+

@@ -1,0 +1,30 @@
+Package: timetravelData
+Title: Access Time Travellers data via API
+Version: 0.1.0
+Authors@R: 
+        c(person(given = "Hanjo",
+           family = "Odendaal",
+           role = c("aut", "cre"),
+           email = "hanjo.oden@gmail.com",
+           comment = c(ORCID = "0000-0003-1172-0444")),
+          person(given = "Alexander",
+           family = "Moradi",
+           role = c("aut"),
+           comment = c(ORCID = "0000-0002-4165-4006")),
+          person(given = "Edward",
+           family = "Kerby",
+           role = c("aut"),
+           comment = c(ORCID = "0000-0003-2156-4449"))
+           )
+Description: What the package does (one paragraph).
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.1
+Imports: 
+    dplyr,
+    jsonlite,
+    magrittr,
+    tidyr, 
+    httr, 
+    glue

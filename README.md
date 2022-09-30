@@ -40,6 +40,16 @@ This is the homepage for the {timetravelData} R package is at
 The homepage for the {timetravelData} `python` package is *coming
 soon!*.
 
+⚠️ The number of results you will be able to return will be dependent on
+your level of access:
+
+-   Example: 10 pages
+-   Limited: 100 pages
+-   Top: 10,000 pages
+
+We are hoping that once we have sufficient funding to expand the
+resource capability in order to do away with the tiered system. 😉
+
 ## Installation
 
 Install from GitHub.
@@ -148,6 +158,15 @@ This function outputs four columns:
     suggested to `unnest` the column using the `tidyr` unfunction as:
     `out %>% unnest(hightlight)`.
 
+You can also look up how many *hits* were seen in the database:
+
+``` r
+total_hits <- query_hits("cotton")
+```
+
+From the example, we can see that the word “cotton” was observed on 1
+pages.
+
 ### Document meta
 
 To find the document meta, we need to feed the `document_meta` function
@@ -163,6 +182,17 @@ out <- query_text(
 guid_hash <- unique(out$guid_hash)[1]
 document_meta(guid_hash) %>% t
 ```
+
+                                [,1]                                                                                                                                              
+    guid_hash                   "b24f414b88a247bd7b5d"                                                                                                                            
+    orig_file                   "fitzgerald_ww_1891_1.pdf"                                                                                                                        
+    title                       "Travels in the coastlands of British East Africa and the islands of Zanzibar and Pemba; their agricultural resources and general characteristics"
+    pages                       "822"                                                                                                                                             
+    file_size                   "42.8 Mb"                                                                                                                                         
+    pdftools_english_word_count "235074"                                                                                                                                          
+    ocr_english_word_count      "269333"                                                                                                                                          
+    cosine_similarity           "0.9878495"                                                                                                                                       
+    jaccard_similarity          "0.5376293"                                                                                                                                       
 
 This function outputs nine columns.
 

@@ -4,7 +4,7 @@
 \alias{parser}
 \title{Helps to parse the output from the query API}
 \usage{
-parser(x)
+parser(x, full_text = FALSE)
 }
 \arguments{
 \item{x}{A response object.}

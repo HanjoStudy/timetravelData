@@ -4,7 +4,7 @@
 \alias{query_text}
 \title{Search the database}
 \usage{
-query_text(query, from_pos = 0, tidy = TRUE)
+query_text(query, from_pos = 0, tidy = TRUE, full_text = FALSE)
 }
 \arguments{
 \item{query}{Specify the text query to send to elasticsearch.}
@@ -12,6 +12,8 @@ query_text(query, from_pos = 0, tidy = TRUE)
 \item{from_pos}{\link{OPTIONAL} Parameter to paginate through result.}
 
 \item{tidy}{Tidy the results into a nested tibble \link{DEFAULT: TRUE}.}
+
+\item{full_text}{\link{OPTIONAL} Parameter to declare whether full text is available.}
 }
 \value{
 tibble.

@@ -14,13 +14,22 @@ check_response_json <- function(response) {
 #' @param x A response object.
 #'
 #' @return tibble
-parser <- function(x){
-  tibble(
+parser <- function(x, full_text = FALSE){
+  
+  res <- tibble(
     guid_hash = unlist(x$source$guid_hash),
     pg_nr = unlist(x$source$pg_nr),
     type = unlist(x$source$type),
     hightlight = lapply(x$hightlight, function(x) unlist(x$text))
   ) 
+  
+  if(full_text){
+    out <- x$full_text
+    if(length(out))
+      res$full_text <- x$full_text
+  }
+  
+  return(res)
 }
 
 #' Check API response for errors

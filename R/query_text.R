@@ -3,6 +3,7 @@
 #' @param query Specify the text query to send to elasticsearch. 
 #' @param tidy Tidy the results into a nested tibble [DEFAULT: TRUE].
 #' @param from_pos [OPTIONAL] Parameter to paginate through result.
+#' @param full_text [OPTIONAL] Parameter to declare whether full text is available.
 #'
 #' @return tibble.
 #' @export
@@ -17,7 +18,7 @@
 #'    )
 #' }
 #' 
-query_text <- function(query, from_pos = 0, tidy = TRUE){
+query_text <- function(query, from_pos = 0, tidy = TRUE, full_text = FALSE){
   
   url <- glue(base_url(), "/journals_text/{URLencode(query)}?from_pos={from_pos}")
   
@@ -30,7 +31,7 @@ query_text <- function(query, from_pos = 0, tidy = TRUE){
     return(content(response))
   }
   
-  out <- content(response) %>% parser
+  out <- content(response) %>% parser(., full_text = full_text)
   return(out)
 
 }

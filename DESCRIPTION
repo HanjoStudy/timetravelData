@@ -1,6 +1,6 @@
 Package: timetravelData
 Title: Access Time Travellers data via API
-Version: 0.1.0
+Version: 0.2.0
 Authors@R: 
         c(person(given = "Hanjo",
            family = "Odendaal",

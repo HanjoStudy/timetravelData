@@ -12,7 +12,7 @@ cache <- new.env()
 
 #' @import jsonlite
 #' @import tibble
-#' @importFrom dplyr arrange
+#' @importFrom dplyr arrange bind_rows
 #' @importFrom magrittr %>%
 #' @importFrom utils URLencode
 #' @importFrom glue glue

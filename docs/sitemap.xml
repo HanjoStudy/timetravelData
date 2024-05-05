@@ -37,16 +37,31 @@
     <loc>/reference/check_response_json.html</loc>
   </url>
   <url>
+    <loc>/reference/document_countries.html</loc>
+  </url>
+  <url>
+    <loc>/reference/document_journey.html</loc>
+  </url>
+  <url>
     <loc>/reference/document_meta.html</loc>
   </url>
   <url>
+    <loc>/reference/document_traveller.html</loc>
+  </url>
+  <url>
     <loc>/reference/get_api_key.html</loc>
+  </url>
+  <url>
+    <loc>/reference/historical_placenames.html</loc>
   </url>
   <url>
     <loc>/reference/index.html</loc>
   </url>
   <url>
     <loc>/reference/parser.html</loc>
+  </url>
+  <url>
+    <loc>/reference/parser_meta.html</loc>
   </url>
   <url>
     <loc>/reference/pipe.html</loc>

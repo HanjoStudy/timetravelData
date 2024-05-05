@@ -16,6 +16,10 @@ reference:
   - query_text
   - query_hits
   - document_meta
+  - document_journey
+  - document_traveller
+  - document_countries
+  - historical_placenames
 - title: internal
   contents:
   - GET
@@ -25,6 +29,7 @@ reference:
   - set_base_url
   - set_server
   - parser
+  - parser_meta
   
 navbar:
   structure:

@@ -14,12 +14,24 @@ check_response_json <- function(response) {
 #' @param x A response object.
 #'
 #' @return tibble
+parser_meta <- function(x, full_text = FALSE){
+  tibble(data.frame( lapply(x, function(x) ifelse(is.null(x), NA, x))))
+  
+}
+
+#' Helps to parse the output from the query API
+#'
+#' @param x A response object.
+#'
+#' @return tibble
 parser <- function(x, full_text = FALSE){
   
   res <- tibble(
     guid_hash = unlist(x$source$guid_hash),
+    translate = unlist(x$source$translate),
     pg_nr = unlist(x$source$pg_nr),
-    type = unlist(x$source$type),
+    tokens = unlist(x$source$tokens),
+    english_words = unlist(x$source$english_words),
     hightlight = lapply(x$hightlight, function(x) unlist(x$text))
   ) 
   

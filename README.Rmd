@@ -129,10 +129,13 @@ The function has three parameters:
 * **from_pos:** This parameter is used in pagination. See the vignette how to page through results.
 * **tidy:** The default is to tidy the results in a nested `tibble` where the word could have occured more than once on a page
 
-This function outputs four columns:
+This function outputs SIX columns:
 
 * **guid_hash:** This is the _global unique identifier_ and links back to a document (not page) within our larger corpus. See below how to look up the document meta information.
+* **translate:** Was this page translated or not.
 * **pg_nr:** This is the _page number_ on which the search got a positive match.
+* **tokens:** Number of tokens on page.
+* **english_words:** Number of English Words matched. The English lookup had to have _more_ (`>`) than 3 characters. 
 * **type:** We use two types of text extraction methods: `libpoppler` from the [`pdftools`](https://github.com/ropensci/pdftools) package, as well as the [`tesseract`](https://github.com/ropensci/tesseract) library when the `pdftools` library failed. This column indicates which tool is displayed.
 * **Highlight:** This is the most important column. This contains the snippets of where the text matched. To extract the text it is suggested to `unnest` the column using the `tidyr` unfunction as: `out %>% unnest(hightlight)`.
 
@@ -153,6 +156,60 @@ document_meta(guid_hash) %>% t
 ```
 
 This function outputs nine columns.
+
+### Document Journey
+
+To find the specific associated with a `guid_hash`, you can use `document_journey`. Some journeys have multiple `guid_hash` identifiers as multiple volumes were written.
+
+```{r, eval = TRUE}
+out <- query_text(
+  query ="cotton",
+  from_pos = 0,
+  tidy = TRUE
+)
+
+guid_hash <- unique(out$guid_hash)[1]
+document_journey(guid_hash) %>% t
+```
+
+### Document Traveller
+
+To find the travellers associated with a journey, you need to have a `journey_id` from `document_journey`
+
+```{r, eval = TRUE}
+out <- query_text(
+  query ="cotton",
+  from_pos = 0,
+  tidy = TRUE
+)
+
+guid_hash <- unique(out$guid_hash)[1]
+journey_id <- document_journey(guid_hash)$journey_id
+  
+document_traveller(journey_id)
+```
+
+### Document Countries
+
+You can also look up the countries that the traveller travelled through using `guid_hash`:
+
+```{r, eval = TRUE}
+out <- query_text(
+  query ="cotton",
+  from_pos = 0,
+  tidy = TRUE
+)
+
+guid_hash <- unique(out$guid_hash)[1]
+  
+document_countries(guid_hash)
+```
+
+At the same time, you can lookup `historical` and `geographical` place names in Africa: 
+
+```{r}
+historical_placenames("TZA")
+```
 
 
 ### Advance search queries with Lucene notation

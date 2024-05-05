@@ -50,7 +50,7 @@ iterator <- seq(0, total_hits, by = 10)
 You can now iterate over the search in the database. In this example I only show 10 as in the case of over query, we have to query 700 request to bring back ALL the information:
 
 ```{r}
-out <- iterator[1:10] %>% map_dfr(., ~query_text(query, from_pos = .x))
+out <- iterator[1:5] %>% map_dfr(., ~query_text(query, from_pos = .x))
 ```
 
 Finally, we can use the same itterator idea to collect the meta information for all the pages:

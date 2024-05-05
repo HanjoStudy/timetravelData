@@ -12,7 +12,7 @@
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png">
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">timetravelData</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0</span>
       </span>
     </div>
 
@@ -98,7 +98,7 @@
 <p>Very few written primary accounts of pre-colonial Africa exist. This lack of documented history hinders our understanding of Africa’s past and long-term trajectory. We collect over 1000 years of African economic history using handwritten accounts from travellers and their maps.</p>
 <p>Analysing such a corpus of text is an insurmountable task for traditional historians and would probably take a lifetimes work. By combining modern day computational linguistic techniques in combination with domain knowledge of African economic history, we build a corpus of pre-colonial African history across space and time. This large body of written accounts can be used to systemically shed new light on Africa’s past.</p>
 <p>The project uses multiple open-source tools to make this data available:</p>
-<p><img src="reference/figures/architecture.png"><!-- --></p>
+<p><img src="reference/figures/architecture.png" width="1857"></p>
 <div class="section level2">
 <h2 id="api-interface">Api Interface<a class="anchor" aria-label="anchor" href="#api-interface"></a>
 </h2>
@@ -161,7 +161,7 @@
 <p>The searching functionality uses a very simple interface through the <code>query_text</code> function. Lets imagine we need to look for whether the word “cotton” is contained in the text. Start by looking up how many <em>hits</em> were seen in the database:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">total_hits</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/query_hits.html">query_hits</a></span><span class="op">(</span><span class="st">"cotton"</span><span class="op">)</span></span></code></pre></div>
-<p>From the example, we can see that the word “cotton” was observed on 9255 pages. Next we can start retrieving the text:</p>
+<p>From the example, we can see that the word “cotton” was observed on 13985 pages. Next we can start retrieving the text:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/query_text.html">query_text</a></span><span class="op">(</span></span>
 <span>  query <span class="op">=</span><span class="st">"cotton"</span>,</span>
@@ -170,19 +170,19 @@
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">out</span></span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 10 × 4</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>   guid_hash            pg_nr type     hightlight</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>   <span class="sc">&lt;</span>chr<span class="sc">&gt;</span>                <span class="er">&lt;</span>int<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>    <span class="er">&lt;</span>list<span class="sc">&gt;</span>    </span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a> <span class="dv">1</span> b24f414b88a247bd7b5d   <span class="dv">680</span> pdftools <span class="sc">&lt;</span>chr [<span class="dv">19</span>]<span class="sc">&gt;</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a> <span class="dv">2</span> 704016213cd70d8cdc58    <span class="dv">66</span> pdftools <span class="sc">&lt;</span>chr [<span class="dv">13</span>]<span class="sc">&gt;</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a> <span class="dv">3</span> 06b3494a9347aad3726c   <span class="dv">194</span> pdftools <span class="sc">&lt;</span>chr [<span class="dv">14</span>]<span class="sc">&gt;</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a> <span class="dv">4</span> da787b1696d108219db4    <span class="dv">81</span> pdftools <span class="sc">&lt;</span>chr [<span class="dv">5</span>]<span class="sc">&gt;</span> </span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a> <span class="dv">5</span> 91078ccd5db5d7530e10   <span class="dv">299</span> pdftools <span class="sc">&lt;</span>chr [<span class="dv">7</span>]<span class="sc">&gt;</span> </span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a> <span class="dv">6</span> b24f414b88a247bd7b5d   <span class="dv">396</span> pdftools <span class="sc">&lt;</span>chr [<span class="dv">9</span>]<span class="sc">&gt;</span> </span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a> <span class="dv">7</span> e2cc4778a6fb02dca0bd   <span class="dv">336</span> pdftools <span class="sc">&lt;</span>chr [<span class="dv">8</span>]<span class="sc">&gt;</span> </span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a> <span class="dv">8</span> b24f414b88a247bd7b5d   <span class="dv">432</span> pdftools <span class="sc">&lt;</span>chr [<span class="dv">11</span>]<span class="sc">&gt;</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a> <span class="dv">9</span> b24f414b88a247bd7b5d   <span class="dv">431</span> pdftools <span class="sc">&lt;</span>chr [<span class="dv">11</span>]<span class="sc">&gt;</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> b24f414b88a247bd7b5d   <span class="dv">679</span> pdftools <span class="sc">&lt;</span>chr [<span class="dv">9</span>]<span class="sc">&gt;</span> </span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># A tibble: 10 × 6</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>   guid_hash            translate pg_nr tokens english_words hightlight</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>   <span class="sc">&lt;</span>chr<span class="sc">&gt;</span>                <span class="er">&lt;</span>chr<span class="sc">&gt;</span>     <span class="er">&lt;</span>int<span class="sc">&gt;</span>  <span class="er">&lt;</span>int<span class="sc">&gt;</span>         <span class="er">&lt;</span>int<span class="sc">&gt;</span> <span class="er">&lt;</span>list<span class="sc">&gt;</span>    </span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a> <span class="dv">1</span> 6214a7f9b9ba3d68ba68 no          <span class="dv">680</span>    <span class="dv">468</span>           <span class="dv">163</span> <span class="sc">&lt;</span>chr [<span class="dv">19</span>]<span class="sc">&gt;</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a> <span class="dv">2</span> 704016213cd70d8cdc58 no           <span class="dv">66</span>    <span class="dv">349</span>           <span class="dv">110</span> <span class="sc">&lt;</span>chr [<span class="dv">13</span>]<span class="sc">&gt;</span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a> <span class="dv">3</span> e3f7f62e9fae56dbb8cf yes          <span class="dv">41</span>    <span class="dv">301</span>           <span class="dv">103</span> <span class="sc">&lt;</span>chr [<span class="dv">9</span>]<span class="sc">&gt;</span> </span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a> <span class="dv">4</span> b364be7f05e40dc2afa4 yes         <span class="dv">138</span>    <span class="dv">342</span>           <span class="dv">135</span> <span class="sc">&lt;</span>chr [<span class="dv">15</span>]<span class="sc">&gt;</span></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a> <span class="dv">5</span> 06b3494a9347aad3726c no          <span class="dv">194</span>    <span class="dv">416</span>           <span class="dv">145</span> <span class="sc">&lt;</span>chr [<span class="dv">14</span>]<span class="sc">&gt;</span></span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a> <span class="dv">6</span> 2154fc604667e60befc6 yes         <span class="dv">374</span>    <span class="dv">224</span>           <span class="dv">102</span> <span class="sc">&lt;</span>chr [<span class="dv">7</span>]<span class="sc">&gt;</span> </span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a> <span class="dv">7</span> e3f7f62e9fae56dbb8cf yes          <span class="dv">85</span>    <span class="dv">216</span>            <span class="dv">75</span> <span class="sc">&lt;</span>chr [<span class="dv">9</span>]<span class="sc">&gt;</span> </span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a> <span class="dv">8</span> e3f7f62e9fae56dbb8cf yes          <span class="dv">49</span>    <span class="dv">273</span>           <span class="dv">103</span> <span class="sc">&lt;</span>chr [<span class="dv">10</span>]<span class="sc">&gt;</span></span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a> <span class="dv">9</span> e3f7f62e9fae56dbb8cf yes          <span class="dv">46</span>    <span class="dv">304</span>           <span class="dv">117</span> <span class="sc">&lt;</span>chr [<span class="dv">11</span>]<span class="sc">&gt;</span></span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a><span class="dv">10</span> e3f7f62e9fae56dbb8cf yes          <span class="dv">76</span>    <span class="dv">293</span>            <span class="dv">85</span> <span class="sc">&lt;</span>chr [<span class="dv">10</span>]<span class="sc">&gt;</span></span></code></pre></div>
 <p>The function has three parameters:</p>
 <ul>
 <li>
@@ -192,12 +192,18 @@
 <li>
 <strong>tidy:</strong> The default is to tidy the results in a nested <code>tibble</code> where the word could have occured more than once on a page</li>
 </ul>
-<p>This function outputs four columns:</p>
+<p>This function outputs SIX columns:</p>
 <ul>
 <li>
 <strong>guid_hash:</strong> This is the <em>global unique identifier</em> and links back to a document (not page) within our larger corpus. See below how to look up the document meta information.</li>
 <li>
+<strong>translate:</strong> Was this page translated or not.</li>
+<li>
 <strong>pg_nr:</strong> This is the <em>page number</em> on which the search got a positive match.</li>
+<li>
+<strong>tokens:</strong> Number of tokens on page.</li>
+<li>
+<strong>english_words:</strong> Number of English Words matched. The English lookup had to have <em>more</em> (<code>&gt;</code>) than 3 characters.</li>
 <li>
 <strong>type:</strong> We use two types of text extraction methods: <code>libpoppler</code> from the <a href="https://github.com/ropensci/pdftools" class="external-link"><code>pdftools</code></a> package, as well as the <a href="https://github.com/ropensci/tesseract" class="external-link"><code>tesseract</code></a> library when the <code>pdftools</code> library failed. This column indicates which tool is displayed.</li>
 <li>
@@ -217,17 +223,85 @@
 <span></span>
 <span><span class="va">guid_hash</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">guid_hash</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
 <span><span class="fu"><a href="reference/document_meta.html">document_meta</a></span><span class="op">(</span><span class="va">guid_hash</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="va">t</span></span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>                            [,<span class="dv">1</span>]                                                                                                                                              </span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>guid_hash                   <span class="st">"b24f414b88a247bd7b5d"</span>                                                                                                                            </span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>orig_file                   <span class="st">"fitzgerald_ww_1891_1.pdf"</span>                                                                                                                        </span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>title                       <span class="st">"Travels in the coastlands of British East Africa and the islands of Zanzibar and Pemba; their agricultural resources and general characteristics"</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>pages                       <span class="st">"822"</span>                                                                                                                                             </span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>file_size                   <span class="st">"42.8 Mb"</span>                                                                                                                                         </span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>pdftools_english_word_count <span class="st">"235074"</span>                                                                                                                                          </span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>ocr_english_word_count      <span class="st">"269333"</span>                                                                                                                                          </span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>cosine_similarity           <span class="st">"0.9878495"</span>                                                                                                                                       </span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>jaccard_similarity          <span class="st">"0.5376293"</span>                                                                                                                                       </span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>                    [,<span class="dv">1</span>]                                                                                                                                              </span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>guid_hash           <span class="st">"6214a7f9b9ba3d68ba68"</span>                                                                                                                            </span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>orig_file           <span class="st">"fitzgerald_ww_1891_1_english_original.pdf"</span>                                                                                                       </span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>pdftools_language   <span class="st">"english"</span>                                                                                                                                         </span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>file_size           <span class="st">"42.8 Mb"</span>                                                                                                                                         </span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>title               <span class="st">"Travels in the coastlands of British East Africa and the islands of Zanzibar and Pemba; their agricultural resources and general characteristics"</span></span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a>language            <span class="st">"english"</span>                                                                                                                                         </span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a>nr_pages_text       <span class="st">"822"</span>                                                                                                                                             </span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a>total_tokens        <span class="st">"263126"</span>                                                                                                                                          </span>
+<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a>total_english_words <span class="st">"83824"</span>                                                                                                                                           </span>
+<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a>pages               <span class="st">"822"</span>                                                                                                                                             </span></code></pre></div>
 <p>This function outputs nine columns.</p>
+</div>
+<div class="section level3">
+<h3 id="document-journey">Document Journey<a class="anchor" aria-label="anchor" href="#document-journey"></a>
+</h3>
+<p>To find the specific associated with a <code>guid_hash</code>, you can use <code>document_journey</code>. Some journeys have multiple <code>guid_hash</code> identifiers as multiple volumes were written.</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/query_text.html">query_text</a></span><span class="op">(</span></span>
+<span>  query <span class="op">=</span><span class="st">"cotton"</span>,</span>
+<span>  from_pos <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  tidy <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">guid_hash</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">guid_hash</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
+<span><span class="fu"><a href="reference/document_journey.html">document_journey</a></span><span class="op">(</span><span class="va">guid_hash</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="va">t</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>           [,<span class="dv">1</span>]                                                                                                                                              </span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>journey_id <span class="st">"fitzgerald_ww_1891"</span>                                                                                                                              </span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>guid_hash  <span class="st">"6214a7f9b9ba3d68ba68"</span>                                                                                                                            </span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a>orig_file  <span class="st">"fitzgerald_ww_1891_1_english_original.pdf"</span>                                                                                                       </span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a>year_began <span class="st">"1891"</span>                                                                                                                                            </span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a>year_end   <span class="st">"1893"</span>                                                                                                                                            </span>
+<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a>title      <span class="st">"Travels in the coastlands of British East Africa and the islands of Zanzibar and Pemba; their agricultural resources and general characteristics"</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="document-traveller">Document Traveller<a class="anchor" aria-label="anchor" href="#document-traveller"></a>
+</h3>
+<p>To find the travellers associated with a journey, you need to have a <code>journey_id</code> from <code>document_journey</code></p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/query_text.html">query_text</a></span><span class="op">(</span></span>
+<span>  query <span class="op">=</span><span class="st">"cotton"</span>,</span>
+<span>  from_pos <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  tidy <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">guid_hash</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">guid_hash</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
+<span><span class="va">journey_id</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/document_journey.html">document_journey</a></span><span class="op">(</span><span class="va">guid_hash</span><span class="op">)</span><span class="op">$</span><span class="va">journey_id</span></span>
+<span>  </span>
+<span><span class="fu"><a href="reference/document_traveller.html">document_traveller</a></span><span class="op">(</span><span class="va">journey_id</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="co"># A tibble: 1 × 11</span></span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>  journey_id         explorer_first_name explorer_surname title_profession_1</span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a>  <span class="sc">&lt;</span>chr<span class="sc">&gt;</span>              <span class="er">&lt;</span>chr<span class="sc">&gt;</span>               <span class="er">&lt;</span>chr<span class="sc">&gt;</span>            <span class="er">&lt;</span>chr<span class="sc">&gt;</span>             </span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a><span class="dv">1</span> fitzgerald_ww_1891 William Walter      FitzGerald       hunter            </span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a><span class="co"># ℹ 7 more variables: title_profession_1_group &lt;chr&gt;, title_profession_2 &lt;lgl&gt;,</span></span>
+<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a><span class="co">#   title_profession_2_group &lt;lgl&gt;, nationality &lt;chr&gt;, gender &lt;lgl&gt;,</span></span>
+<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a><span class="co">#   wiki_link &lt;chr&gt;, wiki_url &lt;chr&gt;</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="document-countries">Document Countries<a class="anchor" aria-label="anchor" href="#document-countries"></a>
+</h3>
+<p>You can also look up the countries that the traveller travelled through using <code>guid_hash</code>:</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/query_text.html">query_text</a></span><span class="op">(</span></span>
+<span>  query <span class="op">=</span><span class="st">"cotton"</span>,</span>
+<span>  from_pos <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  tidy <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">guid_hash</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">guid_hash</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
+<span>  </span>
+<span><span class="fu"><a href="reference/document_countries.html">document_countries</a></span><span class="op">(</span><span class="va">guid_hash</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="co"># A tibble: 2 × 5</span></span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>  journey_id         guid_hash            country  country_iso region</span>
+<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a>  <span class="sc">&lt;</span>chr<span class="sc">&gt;</span>              <span class="er">&lt;</span>chr<span class="sc">&gt;</span>                <span class="er">&lt;</span>chr<span class="sc">&gt;</span>    <span class="er">&lt;</span>chr<span class="sc">&gt;</span>       <span class="er">&lt;</span>chr<span class="sc">&gt;</span> </span>
+<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a><span class="dv">1</span> fitzgerald_ww_1891 6214a7f9b9ba3d68ba68 kenya    KEN         east  </span>
+<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a><span class="dv">2</span> fitzgerald_ww_1891 6214a7f9b9ba3d68ba68 tanzania TZA         east  </span></code></pre></div>
+<p>At the same time, you can lookup <code>historical</code> and <code>geographical</code> place names in Africa:</p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/historical_placenames.html">historical_placenames</a></span><span class="op">(</span><span class="st">"TZA"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="advance-search-queries-with-lucene-notation">Advance search queries with Lucene notation<a class="anchor" aria-label="anchor" href="#advance-search-queries-with-lucene-notation"></a>
@@ -237,49 +311,49 @@
 </h4>
 <p>See full documentation on Elasticsearch’s <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.4/query-dsl-query-string-query.html#query-string-syntax" class="external-link">website</a></p>
 <p>Basic searches uses an analyzer that independently converts each part into tokens before returning matching documents:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">query</span> <span class="op">&lt;-</span> <span class="st">"(new york city) OR (big apple)"</span></span>
 <span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/query_text.html">query_text</a></span><span class="op">(</span><span class="va">query</span><span class="op">)</span></span>
-<span><span class="va">out</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb12"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>Warning<span class="sc">:</span> <span class="st">`</span><span class="at">cols</span><span class="st">`</span> is now required when using <span class="fu">unnest</span>().</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>Please use <span class="st">`</span><span class="at">cols = c(hightlight)</span><span class="st">`</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 41 × 4</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>   guid_hash            pg_nr type     hightlight                               </span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>   <span class="sc">&lt;</span>chr<span class="sc">&gt;</span>                <span class="er">&lt;</span>int<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>    <span class="er">&lt;</span>chr<span class="sc">&gt;</span>                                    </span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a> <span class="dv">1</span> 8b53b078c4a68bd218b9   <span class="dv">460</span> pdftools Still, <span class="sc">--</span>New<span class="sc">--</span> <span class="sc">--</span>York<span class="sc">--</span> is at best an ex…</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a> <span class="dv">2</span> 8b53b078c4a68bd218b9   <span class="dv">460</span> pdftools Neither London nor Paris compares with <span class="sc">-</span>…</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a> <span class="dv">3</span> 8b53b078c4a68bd218b9   <span class="dv">460</span> pdftools While the <span class="sc">--</span>New<span class="sc">--</span> <span class="sc">--</span>York<span class="sc">--</span> hotels give y…</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a> <span class="dv">4</span> 8b53b078c4a68bd218b9   <span class="dv">460</span> pdftools Some of the <span class="sc">--</span>big<span class="sc">--</span> watering<span class="sc">-</span>place hotel…</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a> <span class="dv">5</span> 8b53b078c4a68bd218b9   <span class="dv">460</span> pdftools As <span class="cf">for</span> restaurants, Paris has fine ones,…</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a> <span class="dv">6</span> b8c28359ed8d9c6f5894    <span class="dv">17</span> pdftools H<span class="sc">^</span>orrfctiou <span class="sc">--</span>CITY<span class="sc">--</span> OF <span class="sc">--</span>NEW<span class="sc">--</span> <span class="sc">--</span>YORK<span class="sc">--</span>…</span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a> <span class="dv">7</span> b8c28359ed8d9c6f5894    <span class="dv">17</span> pdftools University of the <span class="sc">--</span>City<span class="sc">--</span> of Nnv <span class="sc">--</span>York…</span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a> <span class="dv">8</span> b8c28359ed8d9c6f5894    <span class="dv">17</span> pdftools By henry DEAPEE, M.D., Professor of Anal…</span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a> <span class="dv">9</span> e1062b1058b2257f9336   <span class="dv">440</span> pdftools <span class="sc">--</span>New<span class="sc">--</span> <span class="sc">--</span>York<span class="sc">--</span> <span class="cf">in</span> <span class="dv">1879</span> imported <span class="dv">2</span>,<span class="dv">740</span>,…</span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> e1062b1058b2257f9336   <span class="dv">440</span> pdftools The West Indies is the chief seat of Pin…</span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="co"># … with 31 more rows</span></span></code></pre></div>
+<span><span class="va">out</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a>Warning<span class="sc">:</span> <span class="st">`</span><span class="at">cols</span><span class="st">`</span> is now required when using <span class="st">`</span><span class="at">unnest()</span><span class="st">`</span>.</span>
+<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a>ℹ Please use <span class="st">`</span><span class="at">cols = c(hightlight)</span><span class="st">`</span>.</span>
+<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a><span class="co"># A tibble: 44 × 6</span></span>
+<span id="cb19-5"><a href="#cb19-5" tabindex="-1"></a>   guid_hash            translate pg_nr tokens english_words hightlight         </span>
+<span id="cb19-6"><a href="#cb19-6" tabindex="-1"></a>   <span class="sc">&lt;</span>chr<span class="sc">&gt;</span>                <span class="er">&lt;</span>chr<span class="sc">&gt;</span>     <span class="er">&lt;</span>int<span class="sc">&gt;</span>  <span class="er">&lt;</span>int<span class="sc">&gt;</span>         <span class="er">&lt;</span>int<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>              </span>
+<span id="cb19-7"><a href="#cb19-7" tabindex="-1"></a> <span class="dv">1</span> 8b53b078c4a68bd218b9 no          <span class="dv">460</span>    <span class="dv">228</span>            <span class="dv">72</span> Still, <span class="sc">--</span>New<span class="sc">--</span> <span class="sc">--</span>Y…</span>
+<span id="cb19-8"><a href="#cb19-8" tabindex="-1"></a> <span class="dv">2</span> 8b53b078c4a68bd218b9 no          <span class="dv">460</span>    <span class="dv">228</span>            <span class="dv">72</span> Neither London nor…</span>
+<span id="cb19-9"><a href="#cb19-9" tabindex="-1"></a> <span class="dv">3</span> 8b53b078c4a68bd218b9 no          <span class="dv">460</span>    <span class="dv">228</span>            <span class="dv">72</span> While the <span class="sc">--</span>New<span class="sc">--</span> …</span>
+<span id="cb19-10"><a href="#cb19-10" tabindex="-1"></a> <span class="dv">4</span> 8b53b078c4a68bd218b9 no          <span class="dv">460</span>    <span class="dv">228</span>            <span class="dv">72</span> Some of the <span class="sc">--</span>big<span class="sc">-</span>…</span>
+<span id="cb19-11"><a href="#cb19-11" tabindex="-1"></a> <span class="dv">5</span> 8b53b078c4a68bd218b9 no          <span class="dv">460</span>    <span class="dv">228</span>            <span class="dv">72</span> As <span class="cf">for</span> restaurants…</span>
+<span id="cb19-12"><a href="#cb19-12" tabindex="-1"></a> <span class="dv">6</span> 9f12c0ed7ad30e8e63a6 no          <span class="dv">117</span>    <span class="dv">362</span>           <span class="dv">123</span> When Jack Kkago re…</span>
+<span id="cb19-13"><a href="#cb19-13" tabindex="-1"></a> <span class="dv">7</span> 9f12c0ed7ad30e8e63a6 no          <span class="dv">117</span>    <span class="dv">362</span>           <span class="dv">123</span> JA CK XKA G O REA …</span>
+<span id="cb19-14"><a href="#cb19-14" tabindex="-1"></a> <span class="dv">8</span> 9f12c0ed7ad30e8e63a6 no          <span class="dv">117</span>    <span class="dv">362</span>           <span class="dv">123</span> These nkagos have …</span>
+<span id="cb19-15"><a href="#cb19-15" tabindex="-1"></a> <span class="dv">9</span> 9f12c0ed7ad30e8e63a6 no          <span class="dv">117</span>    <span class="dv">362</span>           <span class="dv">123</span> Jack seemed to hav…</span>
+<span id="cb19-16"><a href="#cb19-16" tabindex="-1"></a><span class="dv">10</span> 9f12c0ed7ad30e8e63a6 no          <span class="dv">117</span>    <span class="dv">362</span>           <span class="dv">123</span> home <span class="cf">in</span> Newark, <span class="sc">--</span>…</span>
+<span id="cb19-17"><a href="#cb19-17" tabindex="-1"></a><span class="co"># ℹ 34 more rows</span></span></code></pre></div>
 <p>A term can be a single word <em>quick</em> or <em>brown</em> - or a phrase, surrounded by double quotes - “quick brown”</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">query</span> <span class="op">&lt;-</span> <span class="st">'"new york"'</span></span>
 <span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/query_text.html">query_text</a></span><span class="op">(</span><span class="va">query</span><span class="op">)</span></span>
-<span><span class="va">out</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb14"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>Warning<span class="sc">:</span> <span class="st">`</span><span class="at">cols</span><span class="st">`</span> is now required when using <span class="fu">unnest</span>().</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>Please use <span class="st">`</span><span class="at">cols = c(hightlight)</span><span class="st">`</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 38 × 4</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>   guid_hash            pg_nr type     hightlight                               </span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>   <span class="sc">&lt;</span>chr<span class="sc">&gt;</span>                <span class="er">&lt;</span>int<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>    <span class="er">&lt;</span>chr<span class="sc">&gt;</span>                                    </span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a> <span class="dv">1</span> 7ca8d2a7f75a7d7b97c6   <span class="dv">340</span> ocr      Vail, <span class="sc">--</span>New<span class="sc">--</span> <span class="sc">--</span>York<span class="sc">--</span>, N. Y. <span class="dv">3</span>          </span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a> <span class="dv">2</span> 7ca8d2a7f75a7d7b97c6   <span class="dv">340</span> ocr      <span class="sc">--</span>New<span class="sc">--</span> <span class="sc">--</span>York<span class="sc">--</span>, N. Y. John E. Hudson, …</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a> <span class="dv">3</span> 7ca8d2a7f75a7d7b97c6   <span class="dv">340</span> ocr      James, <span class="sc">--</span>New<span class="sc">--</span> <span class="sc">--</span>York<span class="sc">--</span>, N. Y. Miss Loui…</span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a> <span class="dv">4</span> 7ca8d2a7f75a7d7b97c6   <span class="dv">340</span> ocr      Esther Herrmann, <span class="sc">--</span>New<span class="sc">--</span> <span class="sc">--</span>York<span class="sc">--</span>, N. Y.…</span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a> <span class="dv">5</span> 7ca8d2a7f75a7d7b97c6   <span class="dv">340</span> ocr      Gillingham, <span class="sc">--</span>New<span class="sc">--</span> <span class="sc">--</span>York<span class="sc">--</span>, N. Y. Miss…</span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a> <span class="dv">6</span> 7ca8d2a7f75a7d7b97c6   <span class="dv">340</span> ocr      Meyer, <span class="sc">--</span>New<span class="sc">--</span> <span class="sc">--</span>York<span class="sc">--</span>, N. Y. John Ervi…</span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a> <span class="dv">7</span> 7ca8d2a7f75a7d7b97c6   <span class="dv">339</span> ocr      Isaac Adler, <span class="sc">--</span>New<span class="sc">--</span> <span class="sc">--</span>York<span class="sc">--</span>, N. Y. Sam…</span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a> <span class="dv">8</span> 7ca8d2a7f75a7d7b97c6   <span class="dv">339</span> ocr      Daly, <span class="sc">--</span>New<span class="sc">--</span> <span class="sc">--</span>York<span class="sc">--</span>, N. Y. a Charles …</span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a> <span class="dv">9</span> <span class="fl">90e6</span>ef9db342542a755c     <span class="dv">3</span> pdftools <span class="sc">--</span>NEW<span class="sc">--</span> <span class="sc">--</span>YORK<span class="sc">--</span> TROW DIRECTORY, PRINTIN…</span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> <span class="fl">90e6</span>ef9db342542a755c     <span class="dv">3</span> pdftools CHIEF OF CLINIC, NERVOUS DEPARTMENT, VAN…</span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="co"># … with 28 more rows</span></span></code></pre></div>
+<span><span class="va">out</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a>Warning<span class="sc">:</span> <span class="st">`</span><span class="at">cols</span><span class="st">`</span> is now required when using <span class="st">`</span><span class="at">unnest()</span><span class="st">`</span>.</span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>ℹ Please use <span class="st">`</span><span class="at">cols = c(hightlight)</span><span class="st">`</span>.</span>
+<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a><span class="co"># A tibble: 38 × 6</span></span>
+<span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a>   guid_hash            translate pg_nr tokens english_words hightlight         </span>
+<span id="cb21-6"><a href="#cb21-6" tabindex="-1"></a>   <span class="sc">&lt;</span>chr<span class="sc">&gt;</span>                <span class="er">&lt;</span>chr<span class="sc">&gt;</span>     <span class="er">&lt;</span>int<span class="sc">&gt;</span>  <span class="er">&lt;</span>int<span class="sc">&gt;</span>         <span class="er">&lt;</span>int<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>              </span>
+<span id="cb21-7"><a href="#cb21-7" tabindex="-1"></a> <span class="dv">1</span> 7ca8d2a7f75a7d7b97c6 no          <span class="dv">340</span>    <span class="dv">189</span>            <span class="dv">14</span> Vail, <span class="sc">--</span>New<span class="sc">--</span> <span class="sc">--</span>Yo…</span>
+<span id="cb21-8"><a href="#cb21-8" tabindex="-1"></a> <span class="dv">2</span> 7ca8d2a7f75a7d7b97c6 no          <span class="dv">340</span>    <span class="dv">189</span>            <span class="dv">14</span> <span class="sc">--</span>New<span class="sc">--</span> <span class="sc">--</span>York<span class="sc">--</span>, …</span>
+<span id="cb21-9"><a href="#cb21-9" tabindex="-1"></a> <span class="dv">3</span> 7ca8d2a7f75a7d7b97c6 no          <span class="dv">340</span>    <span class="dv">189</span>            <span class="dv">14</span> James, <span class="sc">--</span>New<span class="sc">--</span> <span class="sc">--</span>Y…</span>
+<span id="cb21-10"><a href="#cb21-10" tabindex="-1"></a> <span class="dv">4</span> 7ca8d2a7f75a7d7b97c6 no          <span class="dv">340</span>    <span class="dv">189</span>            <span class="dv">14</span> Esther Herrmann, <span class="sc">-</span>…</span>
+<span id="cb21-11"><a href="#cb21-11" tabindex="-1"></a> <span class="dv">5</span> 7ca8d2a7f75a7d7b97c6 no          <span class="dv">340</span>    <span class="dv">189</span>            <span class="dv">14</span> Gillingham, <span class="sc">--</span>New<span class="sc">-</span>…</span>
+<span id="cb21-12"><a href="#cb21-12" tabindex="-1"></a> <span class="dv">6</span> 7ca8d2a7f75a7d7b97c6 no          <span class="dv">340</span>    <span class="dv">189</span>            <span class="dv">14</span> Meyer, <span class="sc">--</span>New<span class="sc">--</span> <span class="sc">--</span>Y…</span>
+<span id="cb21-13"><a href="#cb21-13" tabindex="-1"></a> <span class="dv">7</span> 04ca493b4a0ca67235e3 yes         <span class="dv">459</span>    <span class="dv">257</span>            <span class="dv">97</span> <span class="sc">--</span>NEW<span class="sc">-----</span>YORK<span class="sc">--</span> <span class="sc">-</span>…</span>
+<span id="cb21-14"><a href="#cb21-14" tabindex="-1"></a> <span class="dv">8</span> 04ca493b4a0ca67235e3 yes         <span class="dv">459</span>    <span class="dv">257</span>            <span class="dv">97</span> I cannot say that …</span>
+<span id="cb21-15"><a href="#cb21-15" tabindex="-1"></a> <span class="dv">9</span> 04ca493b4a0ca67235e3 yes         <span class="dv">459</span>    <span class="dv">257</span>            <span class="dv">97</span> From Niagara Falls…</span>
+<span id="cb21-16"><a href="#cb21-16" tabindex="-1"></a><span class="dv">10</span> 04ca493b4a0ca67235e3 yes         <span class="dv">459</span>    <span class="dv">257</span>            <span class="dv">97</span> The best way to ma…</span>
+<span id="cb21-17"><a href="#cb21-17" tabindex="-1"></a><span class="co"># ℹ 28 more rows</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="fuzzy-search">Fuzzy Search<a class="anchor" aria-label="anchor" href="#fuzzy-search"></a>
@@ -288,83 +362,87 @@
 <blockquote>
 <p>The query uses the Damerau-Levenshtein distance to find all terms with a maximum of two changes, where a change is the insertion, deletion or substitution of a single character, or transposition of two adjacent characters.</p>
 </blockquote>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">query</span> <span class="op">&lt;-</span> <span class="st">"Aligtor~"</span></span>
 <span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/query_text.html">query_text</a></span><span class="op">(</span><span class="va">query</span><span class="op">)</span></span>
-<span><span class="va">out</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb16"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>Warning<span class="sc">:</span> <span class="st">`</span><span class="at">cols</span><span class="st">`</span> is now required when using <span class="fu">unnest</span>().</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>Please use <span class="st">`</span><span class="at">cols = c(hightlight)</span><span class="st">`</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 11 × 4</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>   guid_hash            pg_nr type     hightlight                               </span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>   <span class="sc">&lt;</span>chr<span class="sc">&gt;</span>                <span class="er">&lt;</span>int<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>    <span class="er">&lt;</span>chr<span class="sc">&gt;</span>                                    </span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a> <span class="dv">1</span> d5e102415ffcc7ee0fdf    <span class="dv">57</span> pdftools <span class="st">"49 Sohooner --Aligator-- arrived at Fou…</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="st"> 2 d5e102415ffcc7ee0fdf    57 pdftools "</span>Stockton, of the <span class="sc">--</span>Aligator<span class="sc">--</span>, by whose…</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a> <span class="dv">3</span> d5e102415ffcc7ee0fdf    <span class="dv">57</span> pdftools <span class="st">"Tuesday Morning, 13th May, 1821. â€”The…</span></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="st"> 4 d5e102415ffcc7ee0fdf    16 pdftools "</span>The period of the arrival of the <span class="sc">--</span>Alig…</span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a> <span class="dv">5</span> d5e102415ffcc7ee0fdf    <span class="dv">16</span> pdftools <span class="st">"We had been taught to expect the arriva…</span></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="st"> 6 b307fd07898c2d10004e   250 pdftools "</span><span class="sc">--</span>Alitor<span class="sc">--</span> <span class="fl">4.</span> Eh neh <span class="dv">5</span> Ah tong <span class="fl">6.</span> Ah ee…</span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a> <span class="dv">7</span> c2bcb775ef32fdfa7776   <span class="dv">248</span> pdftools <span class="st">"It runs very awkwardly on account of it…</span></span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="st"> 8 d5e102415ffcc7ee0fdf    17 pdftools "</span>our contract <span class="cf">for</span> the lands, and returne…</span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a> <span class="dv">9</span> d7d3313e5665cf123d55     <span class="dv">6</span> pdftools <span class="st">"D. 1185. f </span><span class="sc">\"</span><span class="st"> --Alitor-- elegans et acc…</span></span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="st">10 d5e102415ffcc7ee0fdf    35 pdftools "</span>We regard it as a most favourable provi…</span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="dv">11</span> 01645ef9996f928b8fd0   <span class="dv">103</span> pdftools <span class="st">"fruits of an intertropical origin flour…</span></span></code></pre></div>
+<span><span class="va">out</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a>Warning<span class="sc">:</span> <span class="st">`</span><span class="at">cols</span><span class="st">`</span> is now required when using <span class="st">`</span><span class="at">unnest()</span><span class="st">`</span>.</span>
+<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a>ℹ Please use <span class="st">`</span><span class="at">cols = c(hightlight)</span><span class="st">`</span>.</span>
+<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" tabindex="-1"></a><span class="co"># A tibble: 13 × 6</span></span>
+<span id="cb23-5"><a href="#cb23-5" tabindex="-1"></a>   guid_hash            translate pg_nr tokens english_words hightlight         </span>
+<span id="cb23-6"><a href="#cb23-6" tabindex="-1"></a>   <span class="sc">&lt;</span>chr<span class="sc">&gt;</span>                <span class="er">&lt;</span>chr<span class="sc">&gt;</span>     <span class="er">&lt;</span>int<span class="sc">&gt;</span>  <span class="er">&lt;</span>int<span class="sc">&gt;</span>         <span class="er">&lt;</span>int<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>              </span>
+<span id="cb23-7"><a href="#cb23-7" tabindex="-1"></a> <span class="dv">1</span> d5e102415ffcc7ee0fdf no           <span class="dv">57</span>    <span class="dv">312</span>            <span class="dv">99</span> <span class="dv">49</span> Sohooner <span class="sc">--</span>Alig…</span>
+<span id="cb23-8"><a href="#cb23-8" tabindex="-1"></a> <span class="dv">2</span> d5e102415ffcc7ee0fdf no           <span class="dv">57</span>    <span class="dv">312</span>            <span class="dv">99</span> Stockton, of the <span class="sc">-</span>…</span>
+<span id="cb23-9"><a href="#cb23-9" tabindex="-1"></a> <span class="dv">3</span> d5e102415ffcc7ee0fdf no           <span class="dv">57</span>    <span class="dv">312</span>            <span class="dv">99</span> Tuesday Morning, 1…</span>
+<span id="cb23-10"><a href="#cb23-10" tabindex="-1"></a> <span class="dv">4</span> d5e102415ffcc7ee0fdf no           <span class="dv">16</span>    <span class="dv">320</span>           <span class="dv">109</span> The period of the …</span>
+<span id="cb23-11"><a href="#cb23-11" tabindex="-1"></a> <span class="dv">5</span> d5e102415ffcc7ee0fdf no           <span class="dv">16</span>    <span class="dv">320</span>           <span class="dv">109</span> We had been taught…</span>
+<span id="cb23-12"><a href="#cb23-12" tabindex="-1"></a> <span class="dv">6</span> b307fd07898c2d10004e no          <span class="dv">250</span>    <span class="dv">130</span>            <span class="dv">14</span> <span class="sc">--</span>Alitor<span class="sc">--</span> <span class="fl">4.</span> Eh n…</span>
+<span id="cb23-13"><a href="#cb23-13" tabindex="-1"></a> <span class="dv">7</span> 99810a792d27f0351a94 no          <span class="dv">371</span>    <span class="dv">176</span>             <span class="dv">1</span> Ferocidad del <span class="sc">--</span>Al…</span>
+<span id="cb23-14"><a href="#cb23-14" tabindex="-1"></a> <span class="dv">8</span> 1209eb31d927d3492fad no          <span class="dv">287</span>    <span class="dv">192</span>             <span class="dv">5</span> . © <span class="dv">17</span> <span class="dv">40</span> <span class="dv">40</span> <span class="dv">70</span> 43…</span>
+<span id="cb23-15"><a href="#cb23-15" tabindex="-1"></a> <span class="dv">9</span> 99810a792d27f0351a94 no           <span class="dv">73</span>    <span class="dv">269</span>             <span class="dv">6</span> embriagado , se ar…</span>
+<span id="cb23-16"><a href="#cb23-16" tabindex="-1"></a><span class="dv">10</span> 99810a792d27f0351a94 no           <span class="dv">74</span>    <span class="dv">256</span>             <span class="dv">8</span> <span class="dv">66</span> EL VIAGERO UNIV…</span>
+<span id="cb23-17"><a href="#cb23-17" tabindex="-1"></a><span class="dv">11</span> c2bcb775ef32fdfa7776 no          <span class="dv">248</span>    <span class="dv">329</span>            <span class="dv">94</span> It runs very awkwa…</span>
+<span id="cb23-18"><a href="#cb23-18" tabindex="-1"></a><span class="dv">12</span> d5e102415ffcc7ee0fdf no           <span class="dv">17</span>    <span class="dv">340</span>           <span class="dv">125</span> our contract <span class="cf">for</span> t…</span>
+<span id="cb23-19"><a href="#cb23-19" tabindex="-1"></a><span class="dv">13</span> e7f8f3d24650e830b7f6 no          <span class="dv">329</span>    <span class="dv">332</span>            <span class="dv">17</span> <span class="sc">--</span>Aligator<span class="sc">--</span> Juda …</span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="proximity-search">Proximity Search<a class="anchor" aria-label="anchor" href="#proximity-search"></a>
 </h4>
 <p>We can also apply proximity searches:</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">query</span> <span class="op">&lt;-</span> <span class="st">'"crocodile shoot"~5'</span></span>
 <span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/query_text.html">query_text</a></span><span class="op">(</span><span class="va">query</span><span class="op">)</span></span>
-<span><span class="va">out</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb18"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>Warning<span class="sc">:</span> <span class="st">`</span><span class="at">cols</span><span class="st">`</span> is now required when using <span class="fu">unnest</span>().</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>Please use <span class="st">`</span><span class="at">cols = c(hightlight)</span><span class="st">`</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 13 × 4</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>   guid_hash            pg_nr type     hightlight                               </span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>   <span class="sc">&lt;</span>chr<span class="sc">&gt;</span>                <span class="er">&lt;</span>int<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>    <span class="er">&lt;</span>chr<span class="sc">&gt;</span>                                    </span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a> <span class="dv">1</span> 8f883596e0ef7831bd51   <span class="dv">174</span> pdftools In these some natives had been watching,…</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a> <span class="dv">2</span> 8f883596e0ef7831bd51   <span class="dv">174</span> pdftools appears, Avlien they <span class="sc">--</span>shoot<span class="sc">--</span> at him wi…</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a> <span class="dv">3</span> 8f883596e0ef7831bd51   <span class="dv">174</span> pdftools hide themselves from view, and rest thei…</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a> <span class="dv">4</span> a84cdc9a0e701b6360fe   <span class="dv">135</span> pdftools I took a rifle from one of my boys, and …</span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a> <span class="dv">5</span> 5d764eb59b5587e5e03b   <span class="dv">272</span> pdftools Hunting again â€”The Premier Nimrod this…</span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a> <span class="dv">6</span> 0ba1ee2ca1d36e383b8b   <span class="dv">292</span> pdftools It is useless to attempt to <span class="sc">--</span>shoot<span class="sc">--</span> th…</span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a> <span class="dv">7</span> f3879792041cf8bbbadb    <span class="dv">19</span> pdftools a <span class="sc">--</span>Crocodile<span class="sc">--</span> â€” The River comes down…</span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a> <span class="dv">8</span> f3879792041cf8bbbadb    <span class="dv">19</span> pdftools Gazelle<span class="sc">-</span>shootingâ€” The Speed of the Gaz…</span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a> <span class="dv">9</span> aa4800b0602890f781f6    <span class="dv">87</span> pdftools <span class="sc">--</span>SHOOT<span class="sc">--</span> A <span class="sc">--</span>CROCODILE<span class="sc">--</span>. <span class="dv">51</span> On 23d Jun…</span>
-<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> b3f7b94ac2bda5f1693d   <span class="dv">103</span> ocr      Every traveller up the Nile thinks it hi…</span>
-<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a><span class="dv">11</span> 5b98c09a6ba6c3f39e80    <span class="dv">72</span> ocr      In the morning, the first thing I did wa…</span>
-<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a><span class="dv">12</span> aa4800b0602890f781f6   <span class="dv">133</span> pdftools <span class="sc">--</span>SHOOT<span class="sc">--</span> A MONSTER. <span class="dv">5</span> <span class="sc">--</span>crocodile<span class="sc">--</span> ; i…</span>
-<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a><span class="dv">13</span> 76fe377e10498e382f34   <span class="dv">210</span> ocr      Supposing it to be a <span class="sc">--</span>crocodile<span class="sc">--</span>, <span class="sc">:</span> th…</span></code></pre></div>
+<span><span class="va">out</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a>Warning<span class="sc">:</span> <span class="st">`</span><span class="at">cols</span><span class="st">`</span> is now required when using <span class="st">`</span><span class="at">unnest()</span><span class="st">`</span>.</span>
+<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a>ℹ Please use <span class="st">`</span><span class="at">cols = c(hightlight)</span><span class="st">`</span>.</span>
+<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" tabindex="-1"></a><span class="co"># A tibble: 14 × 6</span></span>
+<span id="cb25-5"><a href="#cb25-5" tabindex="-1"></a>   guid_hash            translate pg_nr tokens english_words hightlight         </span>
+<span id="cb25-6"><a href="#cb25-6" tabindex="-1"></a>   <span class="sc">&lt;</span>chr<span class="sc">&gt;</span>                <span class="er">&lt;</span>chr<span class="sc">&gt;</span>     <span class="er">&lt;</span>int<span class="sc">&gt;</span>  <span class="er">&lt;</span>int<span class="sc">&gt;</span>         <span class="er">&lt;</span>int<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>              </span>
+<span id="cb25-7"><a href="#cb25-7" tabindex="-1"></a> <span class="dv">1</span> 8f883596e0ef7831bd51 no          <span class="dv">174</span>    <span class="dv">277</span>            <span class="dv">93</span> In these some nati…</span>
+<span id="cb25-8"><a href="#cb25-8" tabindex="-1"></a> <span class="dv">2</span> 8f883596e0ef7831bd51 no          <span class="dv">174</span>    <span class="dv">277</span>            <span class="dv">93</span> appears, Avlien th…</span>
+<span id="cb25-9"><a href="#cb25-9" tabindex="-1"></a> <span class="dv">3</span> 8f883596e0ef7831bd51 no          <span class="dv">174</span>    <span class="dv">277</span>            <span class="dv">93</span> hide themselves fr…</span>
+<span id="cb25-10"><a href="#cb25-10" tabindex="-1"></a> <span class="dv">4</span> a84cdc9a0e701b6360fe no          <span class="dv">135</span>    <span class="dv">196</span>            <span class="dv">69</span> I took a rifle fro…</span>
+<span id="cb25-11"><a href="#cb25-11" tabindex="-1"></a> <span class="dv">5</span> aa4800b0602890f781f6 no           <span class="dv">19</span>    <span class="dv">192</span>            <span class="dv">65</span> a <span class="sc">--</span>Crocodile<span class="sc">--</span> Th…</span>
+<span id="cb25-12"><a href="#cb25-12" tabindex="-1"></a> <span class="dv">6</span> aa4800b0602890f781f6 no           <span class="dv">19</span>    <span class="dv">192</span>            <span class="dv">65</span> Turtle Soup Gazell…</span>
+<span id="cb25-13"><a href="#cb25-13" tabindex="-1"></a> <span class="dv">7</span> 5d764eb59b5587e5e03b no          <span class="dv">272</span>    <span class="dv">224</span>            <span class="dv">77</span> Hunting again â€”T…</span>
+<span id="cb25-14"><a href="#cb25-14" tabindex="-1"></a> <span class="dv">8</span> 0ba1ee2ca1d36e383b8b no          <span class="dv">292</span>    <span class="dv">237</span>           <span class="dv">101</span> It is useless to a…</span>
+<span id="cb25-15"><a href="#cb25-15" tabindex="-1"></a> <span class="dv">9</span> f3879792041cf8bbbadb no           <span class="dv">19</span>    <span class="dv">227</span>            <span class="dv">64</span> a <span class="sc">--</span>Crocodile<span class="sc">--</span> â€…</span>
+<span id="cb25-16"><a href="#cb25-16" tabindex="-1"></a><span class="dv">10</span> f3879792041cf8bbbadb no           <span class="dv">19</span>    <span class="dv">227</span>            <span class="dv">64</span> Gazelle<span class="sc">-</span>shootingâ€…</span>
+<span id="cb25-17"><a href="#cb25-17" tabindex="-1"></a><span class="dv">11</span> aa4800b0602890f781f6 no           <span class="dv">87</span>    <span class="dv">287</span>           <span class="dv">107</span> <span class="sc">--</span>SHOOT<span class="sc">--</span> A <span class="sc">--</span>CROC…</span>
+<span id="cb25-18"><a href="#cb25-18" tabindex="-1"></a><span class="dv">12</span> b3f7b94ac2bda5f1693d no          <span class="dv">103</span>    <span class="dv">297</span>           <span class="dv">109</span> Every traveller up…</span>
+<span id="cb25-19"><a href="#cb25-19" tabindex="-1"></a><span class="dv">13</span> 5b98c09a6ba6c3f39e80 no           <span class="dv">72</span>    <span class="dv">285</span>            <span class="dv">92</span> In the morning, th…</span>
+<span id="cb25-20"><a href="#cb25-20" tabindex="-1"></a><span class="dv">14</span> aa4800b0602890f781f6 no          <span class="dv">133</span>    <span class="dv">277</span>           <span class="dv">109</span> <span class="sc">--</span>SHOOT<span class="sc">--</span> A MONSTE…</span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="boosting-search">Boosting Search<a class="anchor" aria-label="anchor" href="#boosting-search"></a>
 </h4>
 <p>Use the boost operator <code>^</code> to make one term more relevant than another:</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">query</span> <span class="op">&lt;-</span> <span class="st">'"crocodile^ shoot"~5'</span></span>
 <span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/query_text.html">query_text</a></span><span class="op">(</span><span class="va">query</span><span class="op">)</span></span>
-<span><span class="va">out</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb20"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>Warning<span class="sc">:</span> <span class="st">`</span><span class="at">cols</span><span class="st">`</span> is now required when using <span class="fu">unnest</span>().</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>Please use <span class="st">`</span><span class="at">cols = c(hightlight)</span><span class="st">`</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 13 × 4</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>   guid_hash            pg_nr type     hightlight                               </span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>   <span class="sc">&lt;</span>chr<span class="sc">&gt;</span>                <span class="er">&lt;</span>int<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>    <span class="er">&lt;</span>chr<span class="sc">&gt;</span>                                    </span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a> <span class="dv">1</span> 8f883596e0ef7831bd51   <span class="dv">174</span> pdftools In these some natives had been watching,…</span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a> <span class="dv">2</span> 8f883596e0ef7831bd51   <span class="dv">174</span> pdftools appears, Avlien they <span class="sc">--</span>shoot<span class="sc">--</span> at him wi…</span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a> <span class="dv">3</span> 8f883596e0ef7831bd51   <span class="dv">174</span> pdftools hide themselves from view, and rest thei…</span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a> <span class="dv">4</span> a84cdc9a0e701b6360fe   <span class="dv">135</span> pdftools I took a rifle from one of my boys, and …</span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a> <span class="dv">5</span> 5d764eb59b5587e5e03b   <span class="dv">272</span> pdftools Hunting again â€”The Premier Nimrod this…</span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a> <span class="dv">6</span> 0ba1ee2ca1d36e383b8b   <span class="dv">292</span> pdftools It is useless to attempt to <span class="sc">--</span>shoot<span class="sc">--</span> th…</span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a> <span class="dv">7</span> f3879792041cf8bbbadb    <span class="dv">19</span> pdftools a <span class="sc">--</span>Crocodile<span class="sc">--</span> â€” The River comes down…</span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a> <span class="dv">8</span> f3879792041cf8bbbadb    <span class="dv">19</span> pdftools Gazelle<span class="sc">-</span>shootingâ€” The Speed of the Gaz…</span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a> <span class="dv">9</span> aa4800b0602890f781f6    <span class="dv">87</span> pdftools <span class="sc">--</span>SHOOT<span class="sc">--</span> A <span class="sc">--</span>CROCODILE<span class="sc">--</span>. <span class="dv">51</span> On 23d Jun…</span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> b3f7b94ac2bda5f1693d   <span class="dv">103</span> ocr      Every traveller up the Nile thinks it hi…</span>
-<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="dv">11</span> 5b98c09a6ba6c3f39e80    <span class="dv">72</span> ocr      In the morning, the first thing I did wa…</span>
-<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="dv">12</span> aa4800b0602890f781f6   <span class="dv">133</span> pdftools <span class="sc">--</span>SHOOT<span class="sc">--</span> A MONSTER. <span class="dv">5</span> <span class="sc">--</span>crocodile<span class="sc">--</span> ; i…</span>
-<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a><span class="dv">13</span> 76fe377e10498e382f34   <span class="dv">210</span> ocr      Supposing it to be a <span class="sc">--</span>crocodile<span class="sc">--</span>, <span class="sc">:</span> th…</span></code></pre></div>
+<span><span class="va">out</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a>Warning<span class="sc">:</span> <span class="st">`</span><span class="at">cols</span><span class="st">`</span> is now required when using <span class="st">`</span><span class="at">unnest()</span><span class="st">`</span>.</span>
+<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a>ℹ Please use <span class="st">`</span><span class="at">cols = c(hightlight)</span><span class="st">`</span>.</span>
+<span id="cb27-3"><a href="#cb27-3" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" tabindex="-1"></a><span class="co"># A tibble: 14 × 6</span></span>
+<span id="cb27-5"><a href="#cb27-5" tabindex="-1"></a>   guid_hash            translate pg_nr tokens english_words hightlight         </span>
+<span id="cb27-6"><a href="#cb27-6" tabindex="-1"></a>   <span class="sc">&lt;</span>chr<span class="sc">&gt;</span>                <span class="er">&lt;</span>chr<span class="sc">&gt;</span>     <span class="er">&lt;</span>int<span class="sc">&gt;</span>  <span class="er">&lt;</span>int<span class="sc">&gt;</span>         <span class="er">&lt;</span>int<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>              </span>
+<span id="cb27-7"><a href="#cb27-7" tabindex="-1"></a> <span class="dv">1</span> 8f883596e0ef7831bd51 no          <span class="dv">174</span>    <span class="dv">277</span>            <span class="dv">93</span> In these some nati…</span>
+<span id="cb27-8"><a href="#cb27-8" tabindex="-1"></a> <span class="dv">2</span> 8f883596e0ef7831bd51 no          <span class="dv">174</span>    <span class="dv">277</span>            <span class="dv">93</span> appears, Avlien th…</span>
+<span id="cb27-9"><a href="#cb27-9" tabindex="-1"></a> <span class="dv">3</span> 8f883596e0ef7831bd51 no          <span class="dv">174</span>    <span class="dv">277</span>            <span class="dv">93</span> hide themselves fr…</span>
+<span id="cb27-10"><a href="#cb27-10" tabindex="-1"></a> <span class="dv">4</span> a84cdc9a0e701b6360fe no          <span class="dv">135</span>    <span class="dv">196</span>            <span class="dv">69</span> I took a rifle fro…</span>
+<span id="cb27-11"><a href="#cb27-11" tabindex="-1"></a> <span class="dv">5</span> aa4800b0602890f781f6 no           <span class="dv">19</span>    <span class="dv">192</span>            <span class="dv">65</span> a <span class="sc">--</span>Crocodile<span class="sc">--</span> Th…</span>
+<span id="cb27-12"><a href="#cb27-12" tabindex="-1"></a> <span class="dv">6</span> aa4800b0602890f781f6 no           <span class="dv">19</span>    <span class="dv">192</span>            <span class="dv">65</span> Turtle Soup Gazell…</span>
+<span id="cb27-13"><a href="#cb27-13" tabindex="-1"></a> <span class="dv">7</span> 5d764eb59b5587e5e03b no          <span class="dv">272</span>    <span class="dv">224</span>            <span class="dv">77</span> Hunting again â€”T…</span>
+<span id="cb27-14"><a href="#cb27-14" tabindex="-1"></a> <span class="dv">8</span> 0ba1ee2ca1d36e383b8b no          <span class="dv">292</span>    <span class="dv">237</span>           <span class="dv">101</span> It is useless to a…</span>
+<span id="cb27-15"><a href="#cb27-15" tabindex="-1"></a> <span class="dv">9</span> f3879792041cf8bbbadb no           <span class="dv">19</span>    <span class="dv">227</span>            <span class="dv">64</span> a <span class="sc">--</span>Crocodile<span class="sc">--</span> â€…</span>
+<span id="cb27-16"><a href="#cb27-16" tabindex="-1"></a><span class="dv">10</span> f3879792041cf8bbbadb no           <span class="dv">19</span>    <span class="dv">227</span>            <span class="dv">64</span> Gazelle<span class="sc">-</span>shootingâ€…</span>
+<span id="cb27-17"><a href="#cb27-17" tabindex="-1"></a><span class="dv">11</span> aa4800b0602890f781f6 no           <span class="dv">87</span>    <span class="dv">287</span>           <span class="dv">107</span> <span class="sc">--</span>SHOOT<span class="sc">--</span> A <span class="sc">--</span>CROC…</span>
+<span id="cb27-18"><a href="#cb27-18" tabindex="-1"></a><span class="dv">12</span> b3f7b94ac2bda5f1693d no          <span class="dv">103</span>    <span class="dv">297</span>           <span class="dv">109</span> Every traveller up…</span>
+<span id="cb27-19"><a href="#cb27-19" tabindex="-1"></a><span class="dv">13</span> 5b98c09a6ba6c3f39e80 no           <span class="dv">72</span>    <span class="dv">285</span>            <span class="dv">92</span> In the morning, th…</span>
+<span id="cb27-20"><a href="#cb27-20" tabindex="-1"></a><span class="dv">14</span> aa4800b0602890f781f6 no          <span class="dv">133</span>    <span class="dv">277</span>           <span class="dv">109</span> <span class="sc">--</span>SHOOT<span class="sc">--</span> A MONSTE…</span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="boolean">Boolean<a class="anchor" aria-label="anchor" href="#boolean"></a>
@@ -373,27 +451,27 @@
 <p>By default, all terms are optional, as long as one term matches. A search for <code>foo bar baz</code> will find any document that contains one or more of <code>foo</code> or <code>bar</code> or <code>baz</code>. We have already discussed the default_operator above which allows you to force all terms to be required, but there are also boolean operators which can be used in the query string itself to provide more control.</p>
 </blockquote>
 <p>The preferred operators are <code>+</code> (this term must be present) and <code>-</code> (this term must not be present). All other terms are optional. For example, this query:</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">query</span> <span class="op">&lt;-</span> <span class="st">"crocodile shoot +hunting -shoes"</span></span>
 <span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/query_text.html">query_text</a></span><span class="op">(</span><span class="va">query</span><span class="op">)</span></span>
-<span><span class="va">out</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb22"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>Warning<span class="sc">:</span> <span class="st">`</span><span class="at">cols</span><span class="st">`</span> is now required when using <span class="fu">unnest</span>().</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>Please use <span class="st">`</span><span class="at">cols = c(hightlight)</span><span class="st">`</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 44 × 4</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>   guid_hash            pg_nr type     hightlight                               </span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>   <span class="sc">&lt;</span>chr<span class="sc">&gt;</span>                <span class="er">&lt;</span>int<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>    <span class="er">&lt;</span>chr<span class="sc">&gt;</span>                                    </span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a> <span class="dv">1</span> a84cdc9a0e701b6360fe   <span class="dv">135</span> pdftools I took a rifle from one of my boys, and …</span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a> <span class="dv">2</span> a84cdc9a0e701b6360fe   <span class="dv">135</span> pdftools I had completely recovered from my littl…</span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a> <span class="dv">3</span> a84cdc9a0e701b6360fe   <span class="dv">135</span> pdftools of a <span class="sc">--</span>crocodile<span class="sc">--</span> appeared <span class="cf">in</span> the middl…</span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a> <span class="dv">4</span> a84cdc9a0e701b6360fe   <span class="dv">135</span> pdftools A <span class="sc">--</span>CROCODILE<span class="sc">--</span> GIVES US A CHILL. <span class="dv">113</span> st…</span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a> <span class="dv">5</span> 5d764eb59b5587e5e03b    <span class="dv">20</span> pdftools <span class="sc">--</span>Hunting<span class="sc">--</span> again â€”The Premier Nimrod …</span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a> <span class="dv">6</span> 5d764eb59b5587e5e03b    <span class="dv">20</span> pdftools the Setsiebucks â€” prefer <span class="sc">--</span>shoot<span class="sc">--</span> not…</span>
-<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a> <span class="dv">7</span> 5d764eb59b5587e5e03b    <span class="dv">20</span> pdftools Lobengula treated his advisers â€”Traces…</span>
-<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a> <span class="dv">8</span> eb92273a13dce38242cc   <span class="dv">255</span> pdftools <span class="sc">--</span>HUNTING<span class="sc">--</span> EXPERIENCES. <span class="dv">229</span> CHAPTER IX. </span>
-<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a> <span class="dv">9</span> eb92273a13dce38242cc   <span class="dv">255</span> pdftools Fortunately however April, the Bushman, …</span>
-<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> eb92273a13dce38242cc   <span class="dv">255</span> pdftools Wasps<span class="st">' Xestsâ€” --Crocodile-- Pondâ€” Se…</span></span>
-<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a><span class="st"># … with 34 more rows</span></span></code></pre></div>
+<span><span class="va">out</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a>Warning<span class="sc">:</span> <span class="st">`</span><span class="at">cols</span><span class="st">`</span> is now required when using <span class="st">`</span><span class="at">unnest()</span><span class="st">`</span>.</span>
+<span id="cb29-2"><a href="#cb29-2" tabindex="-1"></a>ℹ Please use <span class="st">`</span><span class="at">cols = c(hightlight)</span><span class="st">`</span>.</span>
+<span id="cb29-3"><a href="#cb29-3" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" tabindex="-1"></a><span class="co"># A tibble: 36 × 6</span></span>
+<span id="cb29-5"><a href="#cb29-5" tabindex="-1"></a>   guid_hash            translate pg_nr tokens english_words hightlight         </span>
+<span id="cb29-6"><a href="#cb29-6" tabindex="-1"></a>   <span class="sc">&lt;</span>chr<span class="sc">&gt;</span>                <span class="er">&lt;</span>chr<span class="sc">&gt;</span>     <span class="er">&lt;</span>int<span class="sc">&gt;</span>  <span class="er">&lt;</span>int<span class="sc">&gt;</span>         <span class="er">&lt;</span>int<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>              </span>
+<span id="cb29-7"><a href="#cb29-7" tabindex="-1"></a> <span class="dv">1</span> a84cdc9a0e701b6360fe no          <span class="dv">135</span>    <span class="dv">196</span>            <span class="dv">69</span> I took a rifle fro…</span>
+<span id="cb29-8"><a href="#cb29-8" tabindex="-1"></a> <span class="dv">2</span> a84cdc9a0e701b6360fe no          <span class="dv">135</span>    <span class="dv">196</span>            <span class="dv">69</span> I had completely r…</span>
+<span id="cb29-9"><a href="#cb29-9" tabindex="-1"></a> <span class="dv">3</span> a84cdc9a0e701b6360fe no          <span class="dv">135</span>    <span class="dv">196</span>            <span class="dv">69</span> of a <span class="sc">--</span>crocodile<span class="sc">--</span>…</span>
+<span id="cb29-10"><a href="#cb29-10" tabindex="-1"></a> <span class="dv">4</span> a84cdc9a0e701b6360fe no          <span class="dv">135</span>    <span class="dv">196</span>            <span class="dv">69</span> A <span class="sc">--</span>CROCODILE<span class="sc">--</span> GI…</span>
+<span id="cb29-11"><a href="#cb29-11" tabindex="-1"></a> <span class="dv">5</span> 5d764eb59b5587e5e03b no           <span class="dv">20</span>    <span class="dv">208</span>            <span class="dv">69</span> <span class="sc">--</span>Hunting<span class="sc">--</span> again …</span>
+<span id="cb29-12"><a href="#cb29-12" tabindex="-1"></a> <span class="dv">6</span> 5d764eb59b5587e5e03b no           <span class="dv">20</span>    <span class="dv">208</span>            <span class="dv">69</span> the Setsiebucks â€…</span>
+<span id="cb29-13"><a href="#cb29-13" tabindex="-1"></a> <span class="dv">7</span> 5d764eb59b5587e5e03b no           <span class="dv">20</span>    <span class="dv">208</span>            <span class="dv">69</span> Lobengula treated …</span>
+<span id="cb29-14"><a href="#cb29-14" tabindex="-1"></a> <span class="dv">8</span> 84a5cc12d1f1d89562c8 yes         <span class="dv">460</span>    <span class="dv">327</span>           <span class="dv">111</span> Lo Bengula was cau…</span>
+<span id="cb29-15"><a href="#cb29-15" tabindex="-1"></a> <span class="dv">9</span> 84a5cc12d1f1d89562c8 yes         <span class="dv">460</span>    <span class="dv">327</span>           <span class="dv">111</span> Lo Bengula burst i…</span>
+<span id="cb29-16"><a href="#cb29-16" tabindex="-1"></a><span class="dv">10</span> 84a5cc12d1f1d89562c8 yes         <span class="dv">460</span>    <span class="dv">327</span>           <span class="dv">111</span> It should be known…</span>
+<span id="cb29-17"><a href="#cb29-17" tabindex="-1"></a><span class="co"># ℹ 26 more rows</span></span></code></pre></div>
 <p>states that:</p>
 <ul>
 <li>
@@ -448,7 +526,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
 </div>
 
       </footer>

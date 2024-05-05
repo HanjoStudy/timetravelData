@@ -22,7 +22,7 @@ past.
 
 The project uses multiple open-source tools to make this data available:
 
-![](man/figures/architecture.png)<!-- -->
+<img src="man/figures/architecture.png" width="1857" />
 
 ## Api Interface
 
@@ -43,9 +43,9 @@ soon!*.
 ⚠️ The number of results you will be able to return will be dependent on
 your level of access:
 
--   Example: 10 pages
--   Limited: 100 pages
--   Top: 10,000 pages
+- Example: 10 pages
+- Limited: 100 pages
+- Top: 10,000 pages
 
 We are hoping that once we have sufficient funding to expand the
 resource capability in order to do away with the tiered system. 😉
@@ -114,8 +114,8 @@ were seen in the database:
 total_hits <- query_hits("cotton")
 ```
 
-From the example, we can see that the word “cotton” was observed on 9255
-pages. Next we can start retrieving the text:
+From the example, we can see that the word “cotton” was observed on
+13985 pages. Next we can start retrieving the text:
 
 ``` r
 out <- query_text(
@@ -127,44 +127,48 @@ out <- query_text(
 out
 ```
 
-    # A tibble: 10 × 4
-       guid_hash            pg_nr type     hightlight
-       <chr>                <int> <chr>    <list>    
-     1 b24f414b88a247bd7b5d   680 pdftools <chr [19]>
-     2 704016213cd70d8cdc58    66 pdftools <chr [13]>
-     3 06b3494a9347aad3726c   194 pdftools <chr [14]>
-     4 da787b1696d108219db4    81 pdftools <chr [5]> 
-     5 91078ccd5db5d7530e10   299 pdftools <chr [7]> 
-     6 b24f414b88a247bd7b5d   396 pdftools <chr [9]> 
-     7 e2cc4778a6fb02dca0bd   336 pdftools <chr [8]> 
-     8 b24f414b88a247bd7b5d   432 pdftools <chr [11]>
-     9 b24f414b88a247bd7b5d   431 pdftools <chr [11]>
-    10 b24f414b88a247bd7b5d   679 pdftools <chr [9]> 
+    # A tibble: 10 × 6
+       guid_hash            translate pg_nr tokens english_words hightlight
+       <chr>                <chr>     <int>  <int>         <int> <list>    
+     1 6214a7f9b9ba3d68ba68 no          680    468           163 <chr [19]>
+     2 704016213cd70d8cdc58 no           66    349           110 <chr [13]>
+     3 e3f7f62e9fae56dbb8cf yes          41    301           103 <chr [9]> 
+     4 b364be7f05e40dc2afa4 yes         138    342           135 <chr [15]>
+     5 06b3494a9347aad3726c no          194    416           145 <chr [14]>
+     6 2154fc604667e60befc6 yes         374    224           102 <chr [7]> 
+     7 e3f7f62e9fae56dbb8cf yes          85    216            75 <chr [9]> 
+     8 e3f7f62e9fae56dbb8cf yes          49    273           103 <chr [10]>
+     9 e3f7f62e9fae56dbb8cf yes          46    304           117 <chr [11]>
+    10 e3f7f62e9fae56dbb8cf yes          76    293            85 <chr [10]>
 
 The function has three parameters:
 
--   **query:** This contains the text we want to search.
--   **from_pos:** This parameter is used in pagination. See the vignette
-    how to page through results.
--   **tidy:** The default is to tidy the results in a nested `tibble`
-    where the word could have occured more than once on a page
+- **query:** This contains the text we want to search.
+- **from_pos:** This parameter is used in pagination. See the vignette
+  how to page through results.
+- **tidy:** The default is to tidy the results in a nested `tibble`
+  where the word could have occured more than once on a page
 
-This function outputs four columns:
+This function outputs SIX columns:
 
--   **guid_hash:** This is the *global unique identifier* and links back
-    to a document (not page) within our larger corpus. See below how to
-    look up the document meta information.
--   **pg_nr:** This is the *page number* on which the search got a
-    positive match.
--   **type:** We use two types of text extraction methods: `libpoppler`
-    from the [`pdftools`](https://github.com/ropensci/pdftools) package,
-    as well as the [`tesseract`](https://github.com/ropensci/tesseract)
-    library when the `pdftools` library failed. This column indicates
-    which tool is displayed.
--   **Highlight:** This is the most important column. This contains the
-    snippets of where the text matched. To extract the text it is
-    suggested to `unnest` the column using the `tidyr` unfunction as:
-    `out %>% unnest(hightlight)`.
+- **guid_hash:** This is the *global unique identifier* and links back
+  to a document (not page) within our larger corpus. See below how to
+  look up the document meta information.
+- **translate:** Was this page translated or not.
+- **pg_nr:** This is the *page number* on which the search got a
+  positive match.
+- **tokens:** Number of tokens on page.
+- **english_words:** Number of English Words matched. The English lookup
+  had to have *more* (`>`) than 3 characters.
+- **type:** We use two types of text extraction methods: `libpoppler`
+  from the [`pdftools`](https://github.com/ropensci/pdftools) package,
+  as well as the [`tesseract`](https://github.com/ropensci/tesseract)
+  library when the `pdftools` library failed. This column indicates
+  which tool is displayed.
+- **Highlight:** This is the most important column. This contains the
+  snippets of where the text matched. To extract the text it is
+  suggested to `unnest` the column using the `tidyr` unfunction as:
+  `out %>% unnest(hightlight)`.
 
 ### Document meta
 
@@ -182,18 +186,100 @@ guid_hash <- unique(out$guid_hash)[1]
 document_meta(guid_hash) %>% t
 ```
 
-                                [,1]                                                                                                                                              
-    guid_hash                   "b24f414b88a247bd7b5d"                                                                                                                            
-    orig_file                   "fitzgerald_ww_1891_1.pdf"                                                                                                                        
-    title                       "Travels in the coastlands of British East Africa and the islands of Zanzibar and Pemba; their agricultural resources and general characteristics"
-    pages                       "822"                                                                                                                                             
-    file_size                   "42.8 Mb"                                                                                                                                         
-    pdftools_english_word_count "235074"                                                                                                                                          
-    ocr_english_word_count      "269333"                                                                                                                                          
-    cosine_similarity           "0.9878495"                                                                                                                                       
-    jaccard_similarity          "0.5376293"                                                                                                                                       
+                        [,1]                                                                                                                                              
+    guid_hash           "6214a7f9b9ba3d68ba68"                                                                                                                            
+    orig_file           "fitzgerald_ww_1891_1_english_original.pdf"                                                                                                       
+    pdftools_language   "english"                                                                                                                                         
+    file_size           "42.8 Mb"                                                                                                                                         
+    title               "Travels in the coastlands of British East Africa and the islands of Zanzibar and Pemba; their agricultural resources and general characteristics"
+    language            "english"                                                                                                                                         
+    nr_pages_text       "822"                                                                                                                                             
+    total_tokens        "263126"                                                                                                                                          
+    total_english_words "83824"                                                                                                                                           
+    pages               "822"                                                                                                                                             
 
 This function outputs nine columns.
+
+### Document Journey
+
+To find the specific associated with a `guid_hash`, you can use
+`document_journey`. Some journeys have multiple `guid_hash` identifiers
+as multiple volumes were written.
+
+``` r
+out <- query_text(
+  query ="cotton",
+  from_pos = 0,
+  tidy = TRUE
+)
+
+guid_hash <- unique(out$guid_hash)[1]
+document_journey(guid_hash) %>% t
+```
+
+               [,1]                                                                                                                                              
+    journey_id "fitzgerald_ww_1891"                                                                                                                              
+    guid_hash  "6214a7f9b9ba3d68ba68"                                                                                                                            
+    orig_file  "fitzgerald_ww_1891_1_english_original.pdf"                                                                                                       
+    year_began "1891"                                                                                                                                            
+    year_end   "1893"                                                                                                                                            
+    title      "Travels in the coastlands of British East Africa and the islands of Zanzibar and Pemba; their agricultural resources and general characteristics"
+
+### Document Traveller
+
+To find the travellers associated with a journey, you need to have a
+`journey_id` from `document_journey`
+
+``` r
+out <- query_text(
+  query ="cotton",
+  from_pos = 0,
+  tidy = TRUE
+)
+
+guid_hash <- unique(out$guid_hash)[1]
+journey_id <- document_journey(guid_hash)$journey_id
+  
+document_traveller(journey_id)
+```
+
+    # A tibble: 1 × 11
+      journey_id         explorer_first_name explorer_surname title_profession_1
+      <chr>              <chr>               <chr>            <chr>             
+    1 fitzgerald_ww_1891 William Walter      FitzGerald       hunter            
+    # ℹ 7 more variables: title_profession_1_group <chr>, title_profession_2 <lgl>,
+    #   title_profession_2_group <lgl>, nationality <chr>, gender <lgl>,
+    #   wiki_link <chr>, wiki_url <chr>
+
+### Document Countries
+
+You can also look up the countries that the traveller travelled through
+using `guid_hash`:
+
+``` r
+out <- query_text(
+  query ="cotton",
+  from_pos = 0,
+  tidy = TRUE
+)
+
+guid_hash <- unique(out$guid_hash)[1]
+  
+document_countries(guid_hash)
+```
+
+    # A tibble: 2 × 5
+      journey_id         guid_hash            country  country_iso region
+      <chr>              <chr>                <chr>    <chr>       <chr> 
+    1 fitzgerald_ww_1891 6214a7f9b9ba3d68ba68 kenya    KEN         east  
+    2 fitzgerald_ww_1891 6214a7f9b9ba3d68ba68 tanzania TZA         east  
+
+At the same time, you can lookup `historical` and `geographical` place
+names in Africa:
+
+``` r
+historical_placenames("TZA")
+```
 
 ### Advance search queries with Lucene notation
 
@@ -211,23 +297,23 @@ out <- query_text(query)
 out %>% unnest()
 ```
 
-    Warning: `cols` is now required when using unnest().
-    Please use `cols = c(hightlight)`
+    Warning: `cols` is now required when using `unnest()`.
+    ℹ Please use `cols = c(hightlight)`.
 
-    # A tibble: 41 × 4
-       guid_hash            pg_nr type     hightlight                               
-       <chr>                <int> <chr>    <chr>                                    
-     1 8b53b078c4a68bd218b9   460 pdftools Still, --New-- --York-- is at best an ex…
-     2 8b53b078c4a68bd218b9   460 pdftools Neither London nor Paris compares with -…
-     3 8b53b078c4a68bd218b9   460 pdftools While the --New-- --York-- hotels give y…
-     4 8b53b078c4a68bd218b9   460 pdftools Some of the --big-- watering-place hotel…
-     5 8b53b078c4a68bd218b9   460 pdftools As for restaurants, Paris has fine ones,…
-     6 b8c28359ed8d9c6f5894    17 pdftools H^orrfctiou --CITY-- OF --NEW-- --YORK--…
-     7 b8c28359ed8d9c6f5894    17 pdftools University of the --City-- of Nnv --York…
-     8 b8c28359ed8d9c6f5894    17 pdftools By henry DEAPEE, M.D., Professor of Anal…
-     9 e1062b1058b2257f9336   440 pdftools --New-- --York-- in 1879 imported 2,740,…
-    10 e1062b1058b2257f9336   440 pdftools The West Indies is the chief seat of Pin…
-    # … with 31 more rows
+    # A tibble: 44 × 6
+       guid_hash            translate pg_nr tokens english_words hightlight         
+       <chr>                <chr>     <int>  <int>         <int> <chr>              
+     1 8b53b078c4a68bd218b9 no          460    228            72 Still, --New-- --Y…
+     2 8b53b078c4a68bd218b9 no          460    228            72 Neither London nor…
+     3 8b53b078c4a68bd218b9 no          460    228            72 While the --New-- …
+     4 8b53b078c4a68bd218b9 no          460    228            72 Some of the --big-…
+     5 8b53b078c4a68bd218b9 no          460    228            72 As for restaurants…
+     6 9f12c0ed7ad30e8e63a6 no          117    362           123 When Jack Kkago re…
+     7 9f12c0ed7ad30e8e63a6 no          117    362           123 JA CK XKA G O REA …
+     8 9f12c0ed7ad30e8e63a6 no          117    362           123 These nkagos have …
+     9 9f12c0ed7ad30e8e63a6 no          117    362           123 Jack seemed to hav…
+    10 9f12c0ed7ad30e8e63a6 no          117    362           123 home in Newark, --…
+    # ℹ 34 more rows
 
 A term can be a single word *quick* or *brown* - or a phrase, surrounded
 by double quotes - “quick brown”
@@ -238,23 +324,23 @@ out <- query_text(query)
 out %>% unnest()
 ```
 
-    Warning: `cols` is now required when using unnest().
-    Please use `cols = c(hightlight)`
+    Warning: `cols` is now required when using `unnest()`.
+    ℹ Please use `cols = c(hightlight)`.
 
-    # A tibble: 38 × 4
-       guid_hash            pg_nr type     hightlight                               
-       <chr>                <int> <chr>    <chr>                                    
-     1 7ca8d2a7f75a7d7b97c6   340 ocr      Vail, --New-- --York--, N. Y. 3          
-     2 7ca8d2a7f75a7d7b97c6   340 ocr      --New-- --York--, N. Y. John E. Hudson, …
-     3 7ca8d2a7f75a7d7b97c6   340 ocr      James, --New-- --York--, N. Y. Miss Loui…
-     4 7ca8d2a7f75a7d7b97c6   340 ocr      Esther Herrmann, --New-- --York--, N. Y.…
-     5 7ca8d2a7f75a7d7b97c6   340 ocr      Gillingham, --New-- --York--, N. Y. Miss…
-     6 7ca8d2a7f75a7d7b97c6   340 ocr      Meyer, --New-- --York--, N. Y. John Ervi…
-     7 7ca8d2a7f75a7d7b97c6   339 ocr      Isaac Adler, --New-- --York--, N. Y. Sam…
-     8 7ca8d2a7f75a7d7b97c6   339 ocr      Daly, --New-- --York--, N. Y. a Charles …
-     9 90e6ef9db342542a755c     3 pdftools --NEW-- --YORK-- TROW DIRECTORY, PRINTIN…
-    10 90e6ef9db342542a755c     3 pdftools CHIEF OF CLINIC, NERVOUS DEPARTMENT, VAN…
-    # … with 28 more rows
+    # A tibble: 38 × 6
+       guid_hash            translate pg_nr tokens english_words hightlight         
+       <chr>                <chr>     <int>  <int>         <int> <chr>              
+     1 7ca8d2a7f75a7d7b97c6 no          340    189            14 Vail, --New-- --Yo…
+     2 7ca8d2a7f75a7d7b97c6 no          340    189            14 --New-- --York--, …
+     3 7ca8d2a7f75a7d7b97c6 no          340    189            14 James, --New-- --Y…
+     4 7ca8d2a7f75a7d7b97c6 no          340    189            14 Esther Herrmann, -…
+     5 7ca8d2a7f75a7d7b97c6 no          340    189            14 Gillingham, --New-…
+     6 7ca8d2a7f75a7d7b97c6 no          340    189            14 Meyer, --New-- --Y…
+     7 04ca493b4a0ca67235e3 yes         459    257            97 --NEW-----YORK-- -…
+     8 04ca493b4a0ca67235e3 yes         459    257            97 I cannot say that …
+     9 04ca493b4a0ca67235e3 yes         459    257            97 From Niagara Falls…
+    10 04ca493b4a0ca67235e3 yes         459    257            97 The best way to ma…
+    # ℹ 28 more rows
 
 #### Fuzzy Search
 
@@ -272,23 +358,25 @@ out <- query_text(query)
 out %>% unnest()
 ```
 
-    Warning: `cols` is now required when using unnest().
-    Please use `cols = c(hightlight)`
+    Warning: `cols` is now required when using `unnest()`.
+    ℹ Please use `cols = c(hightlight)`.
 
-    # A tibble: 11 × 4
-       guid_hash            pg_nr type     hightlight                               
-       <chr>                <int> <chr>    <chr>                                    
-     1 d5e102415ffcc7ee0fdf    57 pdftools "49 Sohooner --Aligator-- arrived at Fou…
-     2 d5e102415ffcc7ee0fdf    57 pdftools "Stockton, of the --Aligator--, by whose…
-     3 d5e102415ffcc7ee0fdf    57 pdftools "Tuesday Morning, 13th May, 1821. â€”The…
-     4 d5e102415ffcc7ee0fdf    16 pdftools "The period of the arrival of the --Alig…
-     5 d5e102415ffcc7ee0fdf    16 pdftools "We had been taught to expect the arriva…
-     6 b307fd07898c2d10004e   250 pdftools "--Alitor-- 4. Eh neh 5 Ah tong 6. Ah ee…
-     7 c2bcb775ef32fdfa7776   248 pdftools "It runs very awkwardly on account of it…
-     8 d5e102415ffcc7ee0fdf    17 pdftools "our contract for the lands, and returne…
-     9 d7d3313e5665cf123d55     6 pdftools "D. 1185. f \" --Alitor-- elegans et acc…
-    10 d5e102415ffcc7ee0fdf    35 pdftools "We regard it as a most favourable provi…
-    11 01645ef9996f928b8fd0   103 pdftools "fruits of an intertropical origin flour…
+    # A tibble: 13 × 6
+       guid_hash            translate pg_nr tokens english_words hightlight         
+       <chr>                <chr>     <int>  <int>         <int> <chr>              
+     1 d5e102415ffcc7ee0fdf no           57    312            99 49 Sohooner --Alig…
+     2 d5e102415ffcc7ee0fdf no           57    312            99 Stockton, of the -…
+     3 d5e102415ffcc7ee0fdf no           57    312            99 Tuesday Morning, 1…
+     4 d5e102415ffcc7ee0fdf no           16    320           109 The period of the …
+     5 d5e102415ffcc7ee0fdf no           16    320           109 We had been taught…
+     6 b307fd07898c2d10004e no          250    130            14 --Alitor-- 4. Eh n…
+     7 99810a792d27f0351a94 no          371    176             1 Ferocidad del --Al…
+     8 1209eb31d927d3492fad no          287    192             5 . © 17 40 40 70 43…
+     9 99810a792d27f0351a94 no           73    269             6 embriagado , se ar…
+    10 99810a792d27f0351a94 no           74    256             8 66 EL VIAGERO UNIV…
+    11 c2bcb775ef32fdfa7776 no          248    329            94 It runs very awkwa…
+    12 d5e102415ffcc7ee0fdf no           17    340           125 our contract for t…
+    13 e7f8f3d24650e830b7f6 no          329    332            17 --Aligator-- Juda …
 
 #### Proximity Search
 
@@ -300,25 +388,26 @@ out <- query_text(query)
 out %>% unnest()
 ```
 
-    Warning: `cols` is now required when using unnest().
-    Please use `cols = c(hightlight)`
+    Warning: `cols` is now required when using `unnest()`.
+    ℹ Please use `cols = c(hightlight)`.
 
-    # A tibble: 13 × 4
-       guid_hash            pg_nr type     hightlight                               
-       <chr>                <int> <chr>    <chr>                                    
-     1 8f883596e0ef7831bd51   174 pdftools In these some natives had been watching,…
-     2 8f883596e0ef7831bd51   174 pdftools appears, Avlien they --shoot-- at him wi…
-     3 8f883596e0ef7831bd51   174 pdftools hide themselves from view, and rest thei…
-     4 a84cdc9a0e701b6360fe   135 pdftools I took a rifle from one of my boys, and …
-     5 5d764eb59b5587e5e03b   272 pdftools Hunting again â€”The Premier Nimrod this…
-     6 0ba1ee2ca1d36e383b8b   292 pdftools It is useless to attempt to --shoot-- th…
-     7 f3879792041cf8bbbadb    19 pdftools a --Crocodile-- â€” The River comes down…
-     8 f3879792041cf8bbbadb    19 pdftools Gazelle-shootingâ€” The Speed of the Gaz…
-     9 aa4800b0602890f781f6    87 pdftools --SHOOT-- A --CROCODILE--. 51 On 23d Jun…
-    10 b3f7b94ac2bda5f1693d   103 ocr      Every traveller up the Nile thinks it hi…
-    11 5b98c09a6ba6c3f39e80    72 ocr      In the morning, the first thing I did wa…
-    12 aa4800b0602890f781f6   133 pdftools --SHOOT-- A MONSTER. 5 --crocodile-- ; i…
-    13 76fe377e10498e382f34   210 ocr      Supposing it to be a --crocodile--, : th…
+    # A tibble: 14 × 6
+       guid_hash            translate pg_nr tokens english_words hightlight         
+       <chr>                <chr>     <int>  <int>         <int> <chr>              
+     1 8f883596e0ef7831bd51 no          174    277            93 In these some nati…
+     2 8f883596e0ef7831bd51 no          174    277            93 appears, Avlien th…
+     3 8f883596e0ef7831bd51 no          174    277            93 hide themselves fr…
+     4 a84cdc9a0e701b6360fe no          135    196            69 I took a rifle fro…
+     5 aa4800b0602890f781f6 no           19    192            65 a --Crocodile-- Th…
+     6 aa4800b0602890f781f6 no           19    192            65 Turtle Soup Gazell…
+     7 5d764eb59b5587e5e03b no          272    224            77 Hunting again â€”T…
+     8 0ba1ee2ca1d36e383b8b no          292    237           101 It is useless to a…
+     9 f3879792041cf8bbbadb no           19    227            64 a --Crocodile-- â€…
+    10 f3879792041cf8bbbadb no           19    227            64 Gazelle-shootingâ€…
+    11 aa4800b0602890f781f6 no           87    287           107 --SHOOT-- A --CROC…
+    12 b3f7b94ac2bda5f1693d no          103    297           109 Every traveller up…
+    13 5b98c09a6ba6c3f39e80 no           72    285            92 In the morning, th…
+    14 aa4800b0602890f781f6 no          133    277           109 --SHOOT-- A MONSTE…
 
 #### Boosting Search
 
@@ -330,25 +419,26 @@ out <- query_text(query)
 out %>% unnest()
 ```
 
-    Warning: `cols` is now required when using unnest().
-    Please use `cols = c(hightlight)`
+    Warning: `cols` is now required when using `unnest()`.
+    ℹ Please use `cols = c(hightlight)`.
 
-    # A tibble: 13 × 4
-       guid_hash            pg_nr type     hightlight                               
-       <chr>                <int> <chr>    <chr>                                    
-     1 8f883596e0ef7831bd51   174 pdftools In these some natives had been watching,…
-     2 8f883596e0ef7831bd51   174 pdftools appears, Avlien they --shoot-- at him wi…
-     3 8f883596e0ef7831bd51   174 pdftools hide themselves from view, and rest thei…
-     4 a84cdc9a0e701b6360fe   135 pdftools I took a rifle from one of my boys, and …
-     5 5d764eb59b5587e5e03b   272 pdftools Hunting again â€”The Premier Nimrod this…
-     6 0ba1ee2ca1d36e383b8b   292 pdftools It is useless to attempt to --shoot-- th…
-     7 f3879792041cf8bbbadb    19 pdftools a --Crocodile-- â€” The River comes down…
-     8 f3879792041cf8bbbadb    19 pdftools Gazelle-shootingâ€” The Speed of the Gaz…
-     9 aa4800b0602890f781f6    87 pdftools --SHOOT-- A --CROCODILE--. 51 On 23d Jun…
-    10 b3f7b94ac2bda5f1693d   103 ocr      Every traveller up the Nile thinks it hi…
-    11 5b98c09a6ba6c3f39e80    72 ocr      In the morning, the first thing I did wa…
-    12 aa4800b0602890f781f6   133 pdftools --SHOOT-- A MONSTER. 5 --crocodile-- ; i…
-    13 76fe377e10498e382f34   210 ocr      Supposing it to be a --crocodile--, : th…
+    # A tibble: 14 × 6
+       guid_hash            translate pg_nr tokens english_words hightlight         
+       <chr>                <chr>     <int>  <int>         <int> <chr>              
+     1 8f883596e0ef7831bd51 no          174    277            93 In these some nati…
+     2 8f883596e0ef7831bd51 no          174    277            93 appears, Avlien th…
+     3 8f883596e0ef7831bd51 no          174    277            93 hide themselves fr…
+     4 a84cdc9a0e701b6360fe no          135    196            69 I took a rifle fro…
+     5 aa4800b0602890f781f6 no           19    192            65 a --Crocodile-- Th…
+     6 aa4800b0602890f781f6 no           19    192            65 Turtle Soup Gazell…
+     7 5d764eb59b5587e5e03b no          272    224            77 Hunting again â€”T…
+     8 0ba1ee2ca1d36e383b8b no          292    237           101 It is useless to a…
+     9 f3879792041cf8bbbadb no           19    227            64 a --Crocodile-- â€…
+    10 f3879792041cf8bbbadb no           19    227            64 Gazelle-shootingâ€…
+    11 aa4800b0602890f781f6 no           87    287           107 --SHOOT-- A --CROC…
+    12 b3f7b94ac2bda5f1693d no          103    297           109 Every traveller up…
+    13 5b98c09a6ba6c3f39e80 no           72    285            92 In the morning, th…
+    14 aa4800b0602890f781f6 no          133    277           109 --SHOOT-- A MONSTE…
 
 #### Boolean
 
@@ -369,27 +459,27 @@ out <- query_text(query)
 out %>% unnest()
 ```
 
-    Warning: `cols` is now required when using unnest().
-    Please use `cols = c(hightlight)`
+    Warning: `cols` is now required when using `unnest()`.
+    ℹ Please use `cols = c(hightlight)`.
 
-    # A tibble: 44 × 4
-       guid_hash            pg_nr type     hightlight                               
-       <chr>                <int> <chr>    <chr>                                    
-     1 a84cdc9a0e701b6360fe   135 pdftools I took a rifle from one of my boys, and …
-     2 a84cdc9a0e701b6360fe   135 pdftools I had completely recovered from my littl…
-     3 a84cdc9a0e701b6360fe   135 pdftools of a --crocodile-- appeared in the middl…
-     4 a84cdc9a0e701b6360fe   135 pdftools A --CROCODILE-- GIVES US A CHILL. 113 st…
-     5 5d764eb59b5587e5e03b    20 pdftools --Hunting-- again â€”The Premier Nimrod …
-     6 5d764eb59b5587e5e03b    20 pdftools the Setsiebucks â€” prefer --shoot-- not…
-     7 5d764eb59b5587e5e03b    20 pdftools Lobengula treated his advisers â€”Traces…
-     8 eb92273a13dce38242cc   255 pdftools --HUNTING-- EXPERIENCES. 229 CHAPTER IX. 
-     9 eb92273a13dce38242cc   255 pdftools Fortunately however April, the Bushman, …
-    10 eb92273a13dce38242cc   255 pdftools Wasps' Xestsâ€” --Crocodile-- Pondâ€” Se…
-    # … with 34 more rows
+    # A tibble: 36 × 6
+       guid_hash            translate pg_nr tokens english_words hightlight         
+       <chr>                <chr>     <int>  <int>         <int> <chr>              
+     1 a84cdc9a0e701b6360fe no          135    196            69 I took a rifle fro…
+     2 a84cdc9a0e701b6360fe no          135    196            69 I had completely r…
+     3 a84cdc9a0e701b6360fe no          135    196            69 of a --crocodile--…
+     4 a84cdc9a0e701b6360fe no          135    196            69 A --CROCODILE-- GI…
+     5 5d764eb59b5587e5e03b no           20    208            69 --Hunting-- again …
+     6 5d764eb59b5587e5e03b no           20    208            69 the Setsiebucks â€…
+     7 5d764eb59b5587e5e03b no           20    208            69 Lobengula treated …
+     8 84a5cc12d1f1d89562c8 yes         460    327           111 Lo Bengula was cau…
+     9 84a5cc12d1f1d89562c8 yes         460    327           111 Lo Bengula burst i…
+    10 84a5cc12d1f1d89562c8 yes         460    327           111 It should be known…
+    # ℹ 26 more rows
 
 states that:
 
--   `hunting` must be present.
--   `shoes` must not be present.
--   `crocodile` and `shoot` are optional - their presence increases the
-    relevance.
+- `hunting` must be present.
+- `shoes` must not be present.
+- `crocodile` and `shoot` are optional - their presence increases the
+  relevance.
